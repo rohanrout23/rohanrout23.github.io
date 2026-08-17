@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rohan Rout — AI/ML Engineer & Mentor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0817;
+    --bg-soft:#141230;
+    --card:#181633;
+    --card-2:#1D1A3D;
+    --violet:#8B5CF6;
+    --violet-soft:#A78BFA;
+    --pink:#EC4899;
+    --orange:#FB923C;
+    --cyan:#22D3EE;
+    --blue:#3B82F6;
+    --text:#F5F3FF;
+    --text-dim:rgba(245,243,255,0.68);
+    --text-dim2:rgba(245,243,255,0.5);
+    --line:rgba(245,243,255,0.12);
+    --glass-bg:rgba(255,255,255,0.045);
+    --glass-border:rgba(255,255,255,0.09);
+    --radius:20px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    position:relative;
+    overflow-x:hidden;
+  }
+  body::before,body::after{
+    content:"";position:fixed;border-radius:50%;pointer-events:none;z-index:0;
+    filter:blur(100px);
+  }
+  body::before{
+    top:-220px;left:-180px;width:640px;height:640px;
+    background:radial-gradient(circle, var(--violet) 0%, transparent 70%);
+    opacity:0.4;animation:floatA 20s ease-in-out infinite;
+  }
+  body::after{
+    bottom:-260px;right:-180px;width:680px;height:680px;
+    background:radial-gradient(circle, var(--pink) 0%, transparent 70%);
+    opacity:0.32;animation:floatB 24s ease-in-out infinite;
+  }
+  @keyframes floatA{0%,100%{transform:translate(0,0);}50%{transform:translate(50px,70px);}}
+  @keyframes floatB{0%,100%{transform:translate(0,0);}50%{transform:translate(-60px,-50px);}}
+  @media (prefers-reduced-motion: reduce){
+    body::before,body::after{animation:none;}
+  }
+  h1,h2,h3,.display{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    letter-spacing:-0.02em;
+    margin:0;
+    color:var(--text);
+  }
+  .mono{
+    font-family:'JetBrains Mono', monospace;
+    letter-spacing:0.02em;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px;position:relative;z-index:1;}
+  section{padding:96px 0;position:relative;z-index:1;}
+  @media(max-width:640px){ section{padding:64px 0;} }
+
+  :focus-visible{
+    outline:3px solid var(--cyan);
+    outline-offset:3px;
+  }
+
+  ::selection{background:var(--pink);color:#fff;}
+
+  /* NAV */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(10,8,23,0.72);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1080px;margin:0 auto;padding:16px 28px;
+    display:flex;align-items:center;justify-content:space-between;
+    position:relative;z-index:1;
+  }
+  .logo{
+    display:flex;align-items:center;gap:10px;
+    font-family:'Space Grotesk';font-weight:700;font-size:1.1rem;
+    text-decoration:none;color:var(--text);
+  }
+  .logo-mark{
+    width:34px;height:34px;border-radius:50%;
+    background:linear-gradient(135deg,var(--violet),var(--pink) 55%,var(--orange));
+    color:#fff;display:flex;align-items:center;justify-content:center;
+    font-size:0.85rem;font-weight:700;overflow:hidden;flex-shrink:0;
+    box-shadow:0 0 18px rgba(139,92,246,0.55);
+  }
+  .logo-mark img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+  nav.links{display:flex;gap:28px;font-size:0.95rem;font-weight:500;}
+  nav.links a{text-decoration:none;color:var(--text-dim);transition:color .15s;}
+  nav.links a:hover{color:var(--cyan);}
+  @media(max-width:640px){ nav.links{display:none;} }
+
+  /* HERO */
+  .hero{padding:88px 0 40px;position:relative;overflow:hidden;}
+  #neuralCanvas{
+    position:absolute;inset:0;width:100%;height:100%;
+    z-index:0;pointer-events:none;opacity:0.55;
+  }
+  .hero .wrap{position:relative;z-index:1;}
+  .hero-grid{
+    display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;align-items:center;
+  }
+  @media(max-width:860px){ .hero-grid{grid-template-columns:1fr;} }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(139,92,246,0.12);color:var(--cyan);
+    border:1px solid rgba(34,211,238,0.35);
+    padding:7px 14px;border-radius:999px;
+    font-size:0.78rem;font-weight:600;letter-spacing:0.08em;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{content:"●";color:var(--pink);}
+  .stack-tags{
+    display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px;
+  }
+  .stack-tags span{
+    font-family:'JetBrains Mono';font-size:0.72rem;font-weight:500;
+    padding:5px 11px;border-radius:999px;
+    border:1px solid var(--line);color:var(--text-dim);
+    background:rgba(255,255,255,0.03);
+  }
+  .hero h1{
+    font-size:clamp(2.2rem, 5vw, 3.4rem);
+    line-height:1.1;
+  }
+  .hero h1 .hl{
+    background:linear-gradient(120deg,var(--violet-soft),var(--pink) 55%,var(--orange));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p.lead{
+    font-size:1.15rem;margin-top:22px;max-width:46ch;color:var(--text-dim);
+  }
+  .cta-row{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:14px 26px;border-radius:12px;
+    font-weight:600;font-size:0.98rem;
+    text-decoration:none;border:2px solid transparent;
+    cursor:pointer;transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{
+    background:linear-gradient(120deg,var(--violet),var(--pink) 60%,var(--orange));
+    color:#fff;box-shadow:0 6px 24px rgba(236,72,153,0.35), 0 0 0 rgba(0,0,0,0);
+  }
+  .btn-primary:hover{box-shadow:0 10px 32px rgba(236,72,153,0.5);}
+  .btn-outline{border-color:var(--line);color:var(--text);background:rgba(255,255,255,0.03);}
+  .btn-outline:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(34,211,238,0.08);}
+
+  /* PATH SIGNATURE SVG */
+  .path-card{
+    background:linear-gradient(180deg,var(--card),var(--bg-soft));
+    border:1px solid var(--line);
+    border-radius:24px;padding:32px 24px;
+    position:relative;overflow:hidden;
+    box-shadow:0 0 60px rgba(139,92,246,0.15);
+  }
+  .path-card .path-label{
+    color:var(--cyan);font-size:0.75rem;font-weight:600;
+    letter-spacing:0.1em;margin-bottom:14px;display:block;
+  }
+  .path-svg{width:100%;height:auto;}
+  .path-line{
+    fill:none;stroke:url(#pathGradient);stroke-width:3;
+    stroke-dasharray:600;stroke-dashoffset:600;
+    animation:draw 2.2s ease forwards 0.3s;
+  }
+  @keyframes draw{ to{stroke-dashoffset:0;} }
+  .path-node circle{fill:var(--text);}
+  .path-node text{
+    fill:var(--text);font-family:'Space Grotesk';font-size:11px;font-weight:600;
+  }
+  .path-node .sub{fill:var(--text-dim2);font-family:'Inter';font-weight:400;font-size:9px;}
+  @media (prefers-reduced-motion: reduce){
+    .path-line{animation:none;stroke-dashoffset:0;}
+  }
+
+  /* SECTION HEADERS */
+  .sec-head{max-width:640px;margin-bottom:48px;}
+  .sec-tag{
+    font-family:'JetBrains Mono';font-size:0.78rem;color:var(--cyan);
+    font-weight:500;margin-bottom:10px;display:block;
+  }
+  .sec-head h2{font-size:clamp(1.7rem,3.4vw,2.4rem);}
+  .sec-head p{margin-top:14px;color:var(--text-dim);font-size:1.05rem;}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:start;}
+  @media(max-width:640px){ .about-grid{grid-template-columns:1fr;} }
+  .avatar{
+    width:120px;height:120px;border-radius:50%;
+    padding:3px;
+    background:linear-gradient(135deg,var(--violet),var(--pink),var(--orange));
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;box-shadow:0 0 30px rgba(139,92,246,0.4);
+  }
+  .avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:3px solid var(--bg);}
+  .about-text p{font-size:1.08rem;max-width:62ch;color:var(--text-dim);}
+  .about-links{display:flex;gap:14px;margin-top:26px;flex-wrap:wrap;}
+  .pill-link{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:9px 16px;border-radius:999px;
+    border:1px solid var(--line);background:rgba(255,255,255,0.03);
+    text-decoration:none;font-size:0.9rem;font-weight:500;
+    color:var(--text);transition:border-color .18s, color .18s, background .18s;
+  }
+  .pill-link:hover{border-color:var(--pink);color:var(--pink);background:rgba(236,72,153,0.08);}
+
+  /* STORY */
+  .story-text{max-width:64ch;font-size:1.08rem;color:var(--text-dim);margin-bottom:36px;}
+  .quote-block{
+    background:linear-gradient(160deg,var(--card),var(--card-2));
+    border:1px solid var(--line);
+    border-radius:24px;
+    padding:44px 40px;position:relative;overflow:hidden;
+    box-shadow:0 0 50px rgba(236,72,153,0.12);
+  }
+  .quote-block::before{
+    content:"\201C";
+    font-family:'Space Grotesk';font-weight:700;
+    font-size:7rem;line-height:1;
+    background:linear-gradient(135deg,var(--violet-soft),var(--pink));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    position:absolute;top:6px;left:24px;opacity:0.95;
+  }
+  .quote-block blockquote{
+    font-family:'Space Grotesk';font-weight:600;
+    font-size:clamp(1.2rem,2.6vw,1.55rem);line-height:1.4;
+    margin:0 0 0 8px;padding-top:36px;max-width:56ch;color:var(--text);
+  }
+  .quote-block cite{
+    display:block;margin-top:22px;font-family:'JetBrains Mono';
+    font-style:normal;font-size:0.82rem;color:var(--cyan);
+  }
+  .story-after{max-width:64ch;font-size:1.08rem;color:var(--text-dim);margin-top:32px;}
+
+  /* GALLERY SLIDER */
+  .slider{
+    position:relative;width:100%;max-width:520px;margin:0 auto;
+    aspect-ratio:4/5;border-radius:24px;overflow:hidden;
+    border:1px solid var(--line);
+    box-shadow:0 0 60px rgba(139,92,246,0.25), 0 20px 50px rgba(0,0,0,0.5);
+  }
+  .slide{
+    position:absolute;inset:0;
+    opacity:0;transition:opacity 1.1s ease-in-out;
+  }
+  .slide.active{opacity:1;}
+  .slide img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+  .slider-dots{
+    display:flex;justify-content:center;gap:9px;margin-top:22px;
+  }
+  .slider-dots button{
+    width:9px;height:9px;border-radius:50%;border:none;
+    background:rgba(245,243,255,0.25);cursor:pointer;padding:0;
+    transition:background .25s, transform .25s;
+  }
+  .slider-dots button.active{
+    background:linear-gradient(120deg,var(--violet),var(--pink));
+    transform:scale(1.35);
+  }
+
+  /* HELP CARDS */
+  .help-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:22px;
+  }
+  @media(max-width:700px){ .help-grid{grid-template-columns:1fr;} }
+  .help-card{
+    background:linear-gradient(160deg,var(--card),var(--card-2));
+    border:1px solid var(--line);border-radius:var(--radius);
+    padding:28px;transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .help-card:hover{
+    transform:translateY(-4px);
+    border-color:rgba(139,92,246,0.5);
+    box-shadow:0 14px 40px rgba(139,92,246,0.25);
+  }
+  .help-mark{
+    width:42px;height:42px;border-radius:11px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Space Grotesk';font-weight:700;color:#fff;margin-bottom:16px;
+  }
+  .help-card h3{font-size:1.15rem;margin-bottom:10px;}
+  .help-card p{color:var(--text-dim);font-size:0.98rem;}
+
+  /* BACKGROUND STRIP */
+  .bg-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;}
+  @media(max-width:700px){ .bg-grid{grid-template-columns:1fr;} }
+  .bg-item{
+    background:linear-gradient(160deg,var(--card),var(--card-2));
+    border-radius:var(--radius);padding:24px;
+    border:1px solid var(--line);
+    border-left:3px solid var(--pink);
+  }
+  .bg-item .role{font-family:'Space Grotesk';font-weight:700;font-size:1.05rem;}
+  .bg-item .org{
+    background:linear-gradient(120deg,var(--violet-soft),var(--cyan));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    font-weight:600;margin-top:2px;
+  }
+  .bg-item .dates{font-family:'JetBrains Mono';font-size:0.78rem;color:var(--text-dim2);margin-top:8px;}
+  .post-date{font-family:'JetBrains Mono';font-size:0.75rem;color:var(--text-dim2);margin-top:4px;display:block;}
+  .insights-note{margin-top:8px;font-size:0.9rem;color:var(--text-dim2);}
+  .resource-card{
+    position:relative;overflow:hidden;
+    background:linear-gradient(160deg,var(--card),var(--card-2));
+    border:1px solid var(--line);border-radius:24px;
+    padding:38px;margin-bottom:32px;
+    box-shadow:0 25px 60px rgba(0,0,0,0.35);
+  }
+  .resource-card::before{
+    content:"";position:absolute;width:240px;height:240px;
+    background:linear-gradient(135deg,var(--violet),var(--pink));
+    filter:blur(95px);opacity:0.35;top:-70px;right:-70px;border-radius:50%;
+    pointer-events:none;
+  }
+  .resource-tag{
+    display:inline-block;font-family:'JetBrains Mono';font-size:0.72rem;font-weight:500;
+    padding:5px 12px;border-radius:999px;color:#fff;position:relative;
+    background:linear-gradient(135deg,var(--orange),var(--pink));margin-bottom:16px;
+  }
+  .resource-card h3{font-size:1.4rem;position:relative;margin-bottom:16px;line-height:1.3;}
+  .resource-card p{color:var(--text-dim);position:relative;max-width:72ch;margin-bottom:14px;font-size:1.02rem;}
+  .resource-card .tribute{
+    font-style:italic;color:var(--text-dim2);border-left:2px solid var(--violet-soft);
+    padding-left:16px;margin:20px 0;position:relative;
+  }
+  .resource-meta{
+    display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 24px;position:relative;
+  }
+  .resource-meta span{
+    font-family:'JetBrains Mono';font-size:0.75rem;color:var(--text-dim2);
+    border:1px solid var(--line);padding:5px 12px;border-radius:999px;
+  }
+  .resource-download{position:relative;}
+
+  /* MENTORS */
+  .mentors-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;}
+  @media(max-width:760px){ .mentors-grid{grid-template-columns:1fr;} }
+  .mentor-card{
+    position:relative;overflow:hidden;
+    background:linear-gradient(160deg,var(--card),var(--card-2));
+    border:1px solid var(--line);border-radius:24px;padding:32px;
+    box-shadow:0 20px 50px rgba(0,0,0,0.3);
+  }
+  .mentor-card::before{
+    content:"";position:absolute;width:200px;height:200px;
+    background:linear-gradient(135deg,var(--violet),var(--pink));
+    filter:blur(90px);opacity:0.3;top:-60px;right:-60px;border-radius:50%;
+    pointer-events:none;
+  }
+  .mentor-photo{
+    width:88px;height:88px;border-radius:50%;overflow:hidden;
+    border:3px solid rgba(255,255,255,0.12);
+    box-shadow:0 0 30px rgba(139,92,246,0.4);
+    margin-bottom:18px;position:relative;
+  }
+  .mentor-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+  .mentor-card h3{font-size:1.25rem;margin-bottom:4px;position:relative;}
+  .mentor-role{font-size:0.85rem;color:var(--text-dim2);font-family:'JetBrains Mono';margin-bottom:16px;position:relative;line-height:1.5;}
+  .mentor-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;position:relative;}
+  .mentor-tags span{
+    font-family:'JetBrains Mono';font-size:0.7rem;padding:5px 10px;
+    border-radius:999px;border:1px solid var(--line);color:var(--text-dim);
+  }
+  .mentor-bio{font-size:0.94rem;color:var(--text-dim);margin-bottom:22px;position:relative;}
+  .mentor-cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center;position:relative;}
+  .mentor-price{
+    font-family:'JetBrains Mono';font-size:0.82rem;color:var(--cyan);
+    border:1px solid var(--line);padding:8px 14px;border-radius:10px;
+  }
+
+  .bg-item p{margin-top:12px;font-size:0.95rem;color:var(--text-dim);}
+
+  /* NOTES */
+  .notes-grid{display:flex;flex-direction:column;gap:16px;}
+  details.note{
+    background:linear-gradient(160deg,var(--card),var(--card-2));
+    border:1px solid var(--line);border-radius:var(--radius);
+    padding:6px 26px;transition:border-color .2s;
+  }
+  details.note[open]{border-color:rgba(139,92,246,0.5);box-shadow:0 0 40px rgba(139,92,246,0.15);}
+  details.note summary{
+    cursor:pointer;list-style:none;padding:20px 0;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+  }
+  details.note summary::-webkit-details-marker{display:none;}
+  .note-title{display:flex;align-items:center;gap:14px;}
+  .note-tag{
+    font-family:'JetBrains Mono';font-size:0.7rem;font-weight:500;
+    padding:5px 10px;border-radius:7px;color:#fff;white-space:nowrap;
+  }
+  .note-title h3{font-size:1.1rem;}
+  .note-plus{
+    font-size:1.4rem;color:var(--pink);flex-shrink:0;transition:transform .2s;
+  }
+  details.note[open] .note-plus{transform:rotate(45deg);}
+  .note-body{padding:0 0 26px;border-top:1px solid var(--line);margin-top:2px;padding-top:20px;}
+  .note-block{margin-bottom:16px;}
+  .note-block h4{
+    font-family:'JetBrains Mono';font-size:0.78rem;text-transform:uppercase;
+    letter-spacing:0.06em;color:var(--cyan);margin-bottom:6px;
+  }
+  .note-block p{font-size:0.96rem;color:var(--text-dim);margin:0;}
+
+  /* CONTACT */
+  .contact{
+    background:linear-gradient(180deg,rgba(139,92,246,0.08),transparent);
+  }
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+  @media(max-width:800px){ .contact-grid{grid-template-columns:1fr;} }
+  .form-card{
+    background:var(--text);color:#14102B;border-radius:20px;padding:32px;
+    box-shadow:0 20px 60px rgba(139,92,246,0.3);
+  }
+  .field{margin-bottom:18px;}
+  .field label{
+    display:block;font-size:0.85rem;font-weight:600;margin-bottom:7px;
+  }
+  .field input, .field select, .field textarea{
+    width:100%;padding:12px 14px;border-radius:10px;
+    border:1.5px solid rgba(20,16,43,0.15);font-family:'Inter';font-size:0.96rem;
+    background:#F7F5FF;color:#14102B;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:none;border-color:var(--violet);
+  }
+  .field textarea{min-height:100px;resize:vertical;}
+  .submit-btn{
+    width:100%;
+    background:linear-gradient(120deg,var(--violet),var(--pink) 60%,var(--orange));
+    color:#fff;border:none;
+    padding:14px;border-radius:10px;font-weight:600;font-size:1rem;
+    cursor:pointer;box-shadow:0 8px 24px rgba(236,72,153,0.35);transition:transform .18s, box-shadow .18s;
+  }
+  .submit-btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(236,72,153,0.5);}
+  .contact-side h3{font-size:1.3rem;margin-bottom:14px;}
+  .contact-side p{color:var(--text-dim);margin-bottom:10px;}
+  .direct-email{
+    display:inline-flex;align-items:center;gap:8px;margin-top:8px;
+    font-family:'JetBrains Mono';font-size:0.92rem;
+    text-decoration:none;color:var(--cyan);border-bottom:1.5px solid rgba(34,211,238,0.4);
+    padding-bottom:2px;
+  }
+  .form-note{
+    font-size:0.82rem;color:var(--text-dim2);margin-top:18px;line-height:1.5;
+  }
+
+  /* FOOTER */
+  footer{
+    border-top:1px solid var(--line);padding:36px 0;
+    color:var(--text-dim2);position:relative;z-index:1;
+  }
+  .footer-inner{
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
+    font-size:0.88rem;
+  }
+  .footer-links{display:flex;gap:20px;}
+  .footer-links a{text-decoration:none;color:var(--text-dim);}
+  .footer-links a:hover{color:var(--pink);}
+
+  /* CURSOR EFFECTS */
+  .cursor-glow{
+    position:fixed;top:0;left:0;width:26px;height:26px;
+    border-radius:50%;pointer-events:none;z-index:9999;
+    background:radial-gradient(circle,rgba(139,92,246,0.9) 0%,rgba(236,72,153,0.5) 45%,transparent 75%);
+    filter:blur(2px);
+    transform:translate(-50%,-50%);
+    mix-blend-mode:screen;
+    transition:opacity .3s ease, transform .12s ease-out;
+    opacity:0;
+  }
+  .cursor-glow.active{opacity:1;}
+  .cursor-ring{
+    position:fixed;top:0;left:0;width:0;height:0;
+    border-radius:50%;pointer-events:none;z-index:9998;
+    border:1.5px solid rgba(34,211,238,0.7);
+    transform:translate(-50%,-50%);
+    animation:ringExpand .7s ease-out forwards;
+  }
+  @keyframes ringExpand{
+    0%{width:6px;height:6px;opacity:0.9;border-width:2px;}
+    100%{width:70px;height:70px;opacity:0;border-width:0.5px;}
+  }
+  @media (hover:none){
+    .cursor-glow{display:none;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .cursor-glow{transition:none;}
+    .cursor-ring{animation:none;display:none;}
+  }
+
+  /* ===== ANIMATED GRID BACKGROUND ===== */
+  .bg-grid-layer{
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      linear-gradient(rgba(139,92,246,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(34,211,238,0.06) 1px, transparent 1px);
+    background-size:56px 56px;
+    animation:gridPulse 6s ease-in-out infinite;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 90%);
+  }
+  @keyframes gridPulse{
+    0%,100%{opacity:0.55;}
+    50%{opacity:1;}
+  }
+
+  /* ===== GLOBAL FLOATING PARTICLES ===== */
+  #particlesCanvas{
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    width:100%;height:100%;opacity:0.5;
+  }
+
+  body > main, body > footer, header.nav{position:relative;z-index:1;}
+
+  /* ===== GLASSMORPHISM UPGRADE ===== */
+  .mentor-card, .help-card, .bg-item, .resource-card, .quote-block, details.note, .form-card{
+    background:var(--glass-bg) !important;
+    backdrop-filter:blur(18px) saturate(140%);
+    -webkit-backdrop-filter:blur(18px) saturate(140%);
+    border:1px solid var(--glass-border) !important;
+  }
+  .form-card{background:rgba(255,255,255,0.96) !important;backdrop-filter:none;-webkit-backdrop-filter:none;}
+
+  /* ===== SCROLL REVEAL ===== */
+  .reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity .7s cubic-bezier(.16,.84,.44,1), transform .7s cubic-bezier(.16,.84,.44,1);
+    will-change:opacity, transform;
+  }
+  .reveal.in-view{
+    opacity:1;
+    transform:translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    .bg-grid-layer{animation:none;}
+  }
+
+  /* ===== TYPOGRAPHY: LARGER DRAMATIC SCALE ===== */
+  .sec-head h2{font-size:clamp(2rem, 4.2vw, 3rem);letter-spacing:-0.03em;}
+  .hero h1{font-size:clamp(2.6rem, 6vw, 4.4rem);letter-spacing:-0.035em;}
+
+  /* ===== CYAN/BLUE GROWING HIGHLIGHT ===== */
+  .sec-tag{position:relative;padding-bottom:2px;}
+  .sec-tag::after{
+    content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0;
+    background:linear-gradient(90deg,var(--cyan),var(--blue));
+    transition:width .8s cubic-bezier(.16,.84,.44,1);
+  }
+  .sec-head.in-view .sec-tag::after{width:56px;}
+</style>
+</head>
+<body>
+<div class="bg-grid-layer"></div>
+<canvas id="particlesCanvas"></canvas>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo"><span class="logo-mark"><img src="assets/images/rohan-nav-logo.jpg" alt="Rohan Rout"></span> Rohan Rout</a>
+    <nav class="links">
+      <a href="#about">About</a>
+      <a href="#story">The Spark</a>
+      <a href="#help">How I Help</a>
+      <a href="#mentors">Mentors</a>
+      <a href="#notes">Notes</a>
+      <a href="#insights">Insights</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <canvas id="neuralCanvas"></canvas>
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow mono">AI ENGINEERING MENTORSHIP</span>
+        <div class="stack-tags">
+          <span>LLMs</span><span>GenAI</span><span>ML</span><span>Agentic AI</span><span>LangGraph</span><span>MCP</span>
+        </div>
+        <h1>Get 1:1 <span class="hl">AI engineering guidance</span> from engineers who've actually shipped it.</h1>
+        <p class="lead">Confused about which tech stack to learn, what to prioritize, or how to actually break in? Book a real conversation with working AI engineers — not another course, a person who answers your specific confusion.</p>
+        <div class="cta-row">
+          <a href="#mentors" class="btn btn-primary">Book a Mentor</a>
+          <a href="#help" class="btn btn-outline">See What You Can Book</a>
+        </div>
+      </div>
+      <div class="path-card">
+        <span class="path-label mono">WHERE MOST PEOPLE GET STUCK</span>
+        <svg class="path-svg" viewBox="0 0 320 260" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#8B5CF6"/>
+              <stop offset="55%" stop-color="#EC4899"/>
+              <stop offset="100%" stop-color="#FB923C"/>
+            </linearGradient>
+          </defs>
+          <path class="path-line" d="M30,30 C 120,10 60,90 150,90 C 240,90 180,170 270,170 C 300,180 280,220 290,230"/>
+          <g class="path-node"><circle cx="30" cy="30" r="6"/><text x="44" y="26">Confused about</text><text class="sub" x="44" y="40">which tech stack to learn</text></g>
+          <g class="path-node"><circle cx="150" cy="90" r="6"/><text x="164" y="86">Get 1:1 guidance</text><text class="sub" x="164" y="100">from a working engineer</text></g>
+          <g class="path-node"><circle cx="270" cy="170" r="6"/><text x="200" y="200">Follow a real roadmap</text><text class="sub" x="200" y="214">built for your level</text></g>
+          <g class="path-node"><circle cx="290" cy="230" r="6"/><text x="180" y="250">Ship real projects, confidently</text></g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENTORS -->
+  <section id="mentors">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-tag mono">// MEET THE MENTORS</span>
+        <h2>Learn from people who've actually shipped this stuff</h2>
+        <p>Two working AI engineers, here to help you cut through the noise — pick whichever fits what you're stuck on.</p>
+      </div>
+      <div class="mentors-grid">
+
+        <div class="mentor-card reveal">
+          <div class="mentor-photo"><img src="assets/images/rohan-mentor-card.jpg" alt="Rohan Rout"></div>
+          <h3>Rohan Rout</h3>
+          <div class="mentor-role">Generative AI Engineer @ Infosys · 2× AWS Certified</div>
+          <div class="mentor-tags">
+            <span>LLMs</span><span>Agentic AI</span><span>LangGraph</span><span>MCP</span><span>RAG</span>
+          </div>
+          <p class="mentor-bio">Helps beginners get unstuck on where to even start — picking the right tech stack, building a realistic roadmap, and avoiding the mistakes that waste months.</p>
+          <div class="mentor-cta">
+            <a class="btn btn-primary" href="https://wa.me/917098051318?text=Hi%20Rohan%2C%20I%20found%20your%20mentorship%20page%20and%20would%20like%20to%20book%20a%20session." target="_blank" rel="noopener">Book on WhatsApp</a>
+            <span class="mentor-price">₹99 / 20 min</span>
+          </div>
+        </div>
+
+        <div class="mentor-card reveal">
+          <div class="mentor-photo"><img src="assets/images/rishav-mentor-card.jpg" alt="Rishav Singh"></div>
+          <h3>Rishav Singh</h3>
+          <div class="mentor-role">Lead AI Engineer @ TalentNeuron · AI Architect · Enterprise AI Trainer @ IISc Bangalore</div>
+          <div class="mentor-tags">
+            <span>Multi-Agent Systems</span><span>RAG Architecture</span><span>LLMOps</span><span>MLOps</span><span>AI Training</span>
+          </div>
+          <p class="mentor-bio">5+ years shipping production AI systems, and has personally trained 2,600+ professionals across companies like Adobe, Uber, and NPCI. Great for deeper architecture, production, and career-scaling questions.</p>
+          <div class="mentor-cta">
+            <a class="btn btn-primary" href="https://wa.me/917098051318?text=Hi%2C%20I%20found%20your%20mentorship%20page%20and%20would%20like%20to%20book%20a%20session%20with%20Rishav." target="_blank" rel="noopener">Book on WhatsApp</a>
+            <span class="mentor-price">₹99 / 20 min</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU CAN BOOK -->
+  <section id="help">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-tag mono">// WHAT YOU CAN BOOK</span>
+        <h2>Real sessions, for real confusion</h2>
+        <p>Not generic mentorship talk — pick the kind of session that matches exactly what you're stuck on.</p>
+      </div>
+      <div class="help-grid">
+        <div class="help-card reveal">
+          <div class="help-mark" style="background:linear-gradient(135deg,var(--violet),var(--pink));">01</div>
+          <h3>Tech Stack Clarity Call</h3>
+          <p>Confused between Python vs other languages, TensorFlow vs PyTorch, LangChain vs LangGraph? We help you choose based on where you actually want to go, not by trying everything at once.</p>
+        </div>
+        <div class="help-card reveal">
+          <div class="help-mark" style="background:linear-gradient(135deg,var(--pink),var(--orange));">02</div>
+          <h3>Concept Doubt-Clearing Session</h3>
+          <p>Bring your specific confusion — classical ML, RAG, LangGraph, MCP, whatever's blocking you — and leave with a practical, non-academic explanation.</p>
+        </div>
+        <div class="help-card reveal">
+          <div class="help-mark" style="background:linear-gradient(135deg,var(--cyan),var(--violet));">03</div>
+          <h3>Roadmap & Career Guidance</h3>
+          <p>Get a structured path built for your current level, and learn the mistakes to avoid — the ones that cost us months when we were starting out.</p>
+        </div>
+        <div class="help-card reveal">
+          <div class="help-mark" style="background:linear-gradient(135deg,var(--card-2),var(--violet));">04</div>
+          <h3>Project / Resume Review</h3>
+          <p>1:1 review of what you're building or applying with — direct, specific feedback instead of generic advice.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BACKGROUND -->
+  <section class="background-strip">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-tag mono" style="color:var(--cyan);">// BACKGROUND</span>
+        <h2>Where this experience comes from</h2>
+      </div>
+      <div class="bg-grid">
+        <div class="bg-item reveal">
+          <div class="role">Associate Business Analyst — GenAI Developer</div>
+          <div class="org">Infosys Limited</div>
+          <div class="dates mono">DEC 2025 — PRESENT</div>
+          <p>Building LangGraph-based agent flows, RAG-based knowledge retrieval, and MCP tool orchestration for enterprise AI assistant platforms.</p>
+        </div>
+        <div class="bg-item reveal">
+          <div class="role">AI/ML Engineer</div>
+          <div class="org">Cognizant (TJX Companies)</div>
+          <div class="dates mono">MAR 2023 — NOV 2025</div>
+          <p>Built and deployed ML models on AWS SageMaker for forecasting and anomaly detection; automated ETL pipelines with Glue, Athena, and Lambda.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-tag mono">// ABOUT ROHAN</span>
+        <h2>Why I mentor</h2>
+      </div>
+      <div class="about-grid">
+        <div class="avatar"><img src="assets/images/rohan-about-avatar.jpg" alt="Rohan Rout"></div>
+        <div class="about-text">
+          <p>I'm Rohan, from Asansol, West Bengal — now working in Generative AI, building agentic systems, RAG pipelines, and LLM orchestration. I started exactly where most of you are now: confused about Java, DSA, and what actually mattered.</p>
+          <p>A best friend nudged me toward ML instead, and that hands-on curiosity turned into a full career. Someone once cut through my confusion in ten minutes — I mentor because I want to do the same for the next person stuck where I was.</p>
+          <div class="about-links">
+            <a class="pill-link" href="https://linkedin.com/in/rohannrout" target="_blank" rel="noopener">LinkedIn ↗</a>
+            <a class="pill-link" href="assets/docs/Rohan_Rout_Resume.pdf" download="Rohan_Rout_Resume.pdf">Download Resume ↓</a>
+            <a class="pill-link" href="https://github.com/rohanrout23" target="_blank" rel="noopener">GitHub ↗</a>
+            <a class="pill-link" href="https://www.instagram.com/rohannrout" target="_blank" rel="noopener">Instagram ↗</a>
+            <a class="pill-link" href="mailto:rohanrout522@gmail.com">Email ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story" id="story">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-tag mono">// THE SPARK</span>
+        <h2>The friend who started it all</h2>
+      </div>
+      <p class="story-text">When I was buried in Java and DSA, close to giving up, a friend nudged me somewhere completely different.</p>
+
+      <div class="quote-block reveal">
+        <blockquote>"Forget the DSA grind for a bit. Start learning ML instead, and try implementing it on some real data. You'll definitely like it."</blockquote>
+        <cite>— my friend, the reason I found AI</cite>
+      </div>
+
+      <p class="story-after">Something clicked that Java and DSA never quite did. He's the entire reason I found my way into AI — and the reason I mentor others today.</p>
+    </div>
+  </section>
+
+  <!-- NOTES -->
+  <section id="notes">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-tag mono">// FREE RESOURCES</span>
+        <h2>Free notes from your mentors</h2>
+        <p>Before you even book a session, start here. Tap a topic to expand — each one covers what to focus on, what to skip, and real mistakes made along the way.</p>
+      </div>
+      <div class="notes-grid">
+
+        <details class="note reveal">
+          <summary>
+            <div class="note-title">
+              <span class="note-tag" style="background:linear-gradient(135deg,var(--violet),var(--pink));">CLASSICAL ML</span>
+              <h3>Where it all begins</h3>
+            </div>
+            <span class="note-plus">+</span>
+          </summary>
+          <div class="note-body">
+            <div class="note-block"><h4>Focus on</h4><p>Understand why a model works before touching sklearn. Master Linear/Logistic Regression, Decision Trees, Random Forest, KNN, SVM, Naive Bayes, and K-Means — plus data cleaning, feature engineering, and evaluation metrics. Real-world AI work is 70% data handling, not modeling.</p></div>
+            <div class="note-block"><h4>Skip for now</h4><p>Don't obsess over hyperparameter tuning frameworks or deep mathematical derivations before you understand the base algorithm and have built a few projects.</p></div>
+            <div class="note-block"><h4>Mistake I made</h4><p>I built models on messy datasets without properly understanding the data first — accuracy looked fine, but the model was learning noise. Spend more time understanding your data than tuning your model.</p></div>
+          </div>
+        </details>
+
+        <details class="note reveal">
+          <summary>
+            <div class="note-title">
+              <span class="note-tag" style="background:linear-gradient(135deg,var(--pink),var(--orange));">DEEP LEARNING</span>
+              <h3>Moving beyond classical ML</h3>
+            </div>
+            <span class="note-plus">+</span>
+          </summary>
+          <div class="note-body">
+            <div class="note-block"><h4>Focus on</h4><p>Perceptrons, activation functions, forward/backward propagation, and gradient descent — conceptually, before frameworks. Then CNNs, RNN/LSTM basics, and Transformers. Pick one framework (PyTorch is a good default) and go deep.</p></div>
+            <div class="note-block"><h4>Skip for now</h4><p>Don't try to master every architecture — GANs, Diffusion Models — before you're comfortable training a basic feedforward or CNN model end-to-end.</p></div>
+            <div class="note-block"><h4>Mistake I made</h4><p>I tried learning too many architectures at once without finishing one complete project. Build one full pipeline — data to deployment — before chasing the next architecture.</p></div>
+          </div>
+        </details>
+
+        <details class="note reveal">
+          <summary>
+            <div class="note-title">
+              <span class="note-tag" style="background:linear-gradient(135deg,var(--cyan),var(--violet));">LANGCHAIN</span>
+              <h3>Building with LLMs</h3>
+            </div>
+            <span class="note-plus">+</span>
+          </summary>
+          <div class="note-body">
+            <div class="note-block"><h4>Focus on</h4><p>Prompts, Chains, Memory, and Retrievers cover 80% of real use. RAG is the single most practical skill right now — learn chunking, embeddings, vector storage (FAISS/Chroma), and retrieval. Then tool/function calling.</p></div>
+            <div class="note-block"><h4>Skip for now</h4><p>Don't get lost in every integration LangChain offers. Learn the pattern once with one vector DB and one LLM provider — it transfers everywhere else.</p></div>
+            <div class="note-block"><h4>Mistake I made</h4><p>I used pre-built chains without understanding what was happening inside them. Build a RAG pipeline manually at least once so you know what the abstraction is doing for you.</p></div>
+          </div>
+        </details>
+
+        <details class="note reveal">
+          <summary>
+            <div class="note-title">
+              <span class="note-tag" style="background:linear-gradient(135deg,var(--card-2),var(--violet));">LANGGRAPH</span>
+              <h3>From chains to agents</h3>
+            </div>
+            <span class="note-plus">+</span>
+          </summary>
+          <div class="note-body">
+            <div class="note-block"><h4>Focus on</h4><p>The shift from linear pipelines to stateful, cyclical workflows. Understand nodes, edges, state management, conditional routing, and human-in-the-loop checkpoints — critical for production agent systems.</p></div>
+            <div class="note-block"><h4>Skip for now</h4><p>Don't build complex multi-agent systems on day one. Start with a single agent, 2-3 tools, and a simple decision loop.</p></div>
+            <div class="note-block"><h4>Mistake I made</h4><p>I underestimated state management — my agents lost context between steps. Get comfortable with how state flows through your graph before adding complexity.</p></div>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- INSIGHTS -->
+  <section id="insights">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-tag mono">// FROM YOUR MENTORS</span>
+        <h2>Ideas, guidance & things worth reading</h2>
+        <p>Ongoing ideas and honest guidance from us — proof of what you can expect in a real session, not just a taste. Tap any entry to read it in full.</p>
+      </div>
+      <div class="resource-card reveal">
+        <span class="resource-tag">FREE RESOURCE</span>
+        <h3>The DSA roadmap that actually got me unstuck</h3>
+        <p>For the longest time, my biggest confusion wasn't a specific DSA topic — it was not knowing <em>how much</em> DSA I even needed as someone heading toward AI engineering. I watched tons of videos, solved hundreds of scattered problems, and still felt lost, because I had no structure.</p>
+        <p>This sheet is what finally fixed that. It's a week-by-week DSA roadmap — problems, difficulty levels, and curated video lectures, all sequenced so you're never guessing what to do next. It was originally shared with me by one of my seniors, a teacher who genuinely cared about students figuring this out properly.</p>
+        <div class="tribute">He's no longer with us, but this sheet has helped people land strong roles and salaries long after he made it. Sharing it here felt like the right way to carry that forward.</div>
+        <div class="resource-meta">
+          <span>12-week structure</span>
+          <span>Session recordings included</span>
+          <span>Free + paid resource links</span>
+          <span>Problem sets by difficulty</span>
+        </div>
+        <a class="btn btn-primary resource-download" href="assets/docs/DSA_Success_Map.xlsx" download="DSA_Success_Map.xlsx">Download the DSA Roadmap ↓</a>
+      </div>
+
+      <div class="notes-grid">
+
+        <!-- COPY ONE OF THESE <details> BLOCKS TO ADD A NEW POST -->
+
+        <details class="note reveal">
+          <summary>
+            <div class="note-title">
+              <span class="note-tag" style="background:linear-gradient(135deg,var(--violet),var(--pink));">IDEA</span>
+              <div>
+                <h3>Most beginners don't need more courses — they need fewer</h3>
+                <span class="post-date">AUG 2026</span>
+              </div>
+            </div>
+            <span class="note-plus">+</span>
+          </summary>
+          <div class="note-body">
+            <div class="note-block"><p>Every week I talk to someone with 12 half-finished courses and zero shipped projects. The problem was never a lack of resources — it's decision fatigue. Pick one roadmap, ignore every other "must-watch" video for 30 days, and just build. You'll learn more from one messy finished project than from five polished course completions.</p></div>
+          </div>
+        </details>
+
+        <details class="note reveal">
+          <summary>
+            <div class="note-title">
+              <span class="note-tag" style="background:linear-gradient(135deg,var(--cyan),var(--violet));">RESEARCH</span>
+              <div>
+                <h3>Quick take: why RAG still beats fine-tuning for most use cases</h3>
+                <span class="post-date">AUG 2026</span>
+              </div>
+            </div>
+            <span class="note-plus">+</span>
+          </summary>
+          <div class="note-body">
+            <div class="note-block"><p>Fine-tuning feels like the "advanced" move, so beginners chase it early. In practice, most production use cases are better served by retrieval — it's cheaper, easier to update when your data changes, and doesn't require retraining every time something new comes in. Save fine-tuning for when retrieval genuinely can't solve your problem, not as a default first step.</p></div>
+          </div>
+        </details>
+
+        <details class="note reveal">
+          <summary>
+            <div class="note-title">
+              <span class="note-tag" style="background:linear-gradient(135deg,var(--pink),var(--orange));">GUIDANCE</span>
+              <div>
+                <h3>How I actually evaluate if an agent framework is worth learning</h3>
+                <span class="post-date">AUG 2026</span>
+              </div>
+            </div>
+            <span class="note-plus">+</span>
+          </summary>
+          <div class="note-body">
+            <div class="note-block"><p>New agent frameworks show up constantly, and it's tempting to chase all of them. My filter: does it have real production adoption, active maintenance, and does it solve a problem my current stack genuinely can't? If the answer to any of those is no, I skip it — trend-chasing costs more time than it saves.</p></div>
+          </div>
+        </details>
+
+      </div>
+      <p class="insights-note">More posts coming soon — I'll keep adding ideas, notes, and research breakdowns here as I post them.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-tag mono">// GET IN TOUCH</span>
+        <h2>Stuck on something? Tell me.</h2>
+        <p>Whether it's a concept, a roadmap question, or a project you're stuck on — fill this in and I'll get back to you.</p>
+      </div>
+      <div class="contact-grid">
+        <form class="form-card reveal" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="field">
+            <label for="level">Experience level</label>
+            <select id="level" name="experience_level">
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="stuck">What are you stuck on?</label>
+            <textarea id="stuck" name="message" required placeholder="e.g. I can't decide between PyTorch and TensorFlow, or which agent framework to learn first..."></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+        <div class="contact-side">
+          <h3>Prefer email?</h3>
+          <p>You can also reach me directly — I read every message.</p>
+          <a class="direct-email" href="mailto:rohanrout522@gmail.com">rohanrout522@gmail.com ↗</a>
+          <p style="margin-top:22px;">Stuck on something, have an idea, or just want to talk AI engineering? Reach out over <strong>email</strong>, <strong>Instagram</strong>, or <strong>LinkedIn</strong> — whichever's easiest for you.</p>
+          <div class="about-links" style="margin-top:14px;">
+            <a class="pill-link" href="https://www.instagram.com/rohannrout" target="_blank" rel="noopener">Instagram ↗</a>
+            <a class="pill-link" href="https://linkedin.com/in/rohannrout" target="_blank" rel="noopener">LinkedIn ↗</a>
+          </div>
+          <p class="form-note">Form note: this form is wired to Formspree — create a free account at formspree.io, get your form ID, and replace <code>YOUR_FORM_ID</code> in the code with it to start receiving submissions by email.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span>© 2026 Rohan Rout · Built with curiosity in Asansol, WB</span>
+    <div class="footer-links">
+      <a href="https://linkedin.com/in/rohannrout" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/rohanrout23" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.instagram.com/rohannrout" target="_blank" rel="noopener">Instagram</a>
+      <a href="mailto:rohanrout522@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ===== Neural network background (hero only) =====
+  (function(){
+    const canvas = document.getElementById('neuralCanvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const hero = canvas.closest('.hero');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let W, H, particles = [];
+    const COLORS = ['139,92,246', '236,72,153', '34,211,238'];
+    const COUNT = 46;
+
+    function resize(){
+      W = canvas.width = hero.offsetWidth;
+      H = canvas.height = hero.offsetHeight;
+    }
+    function init(){
+      resize();
+      particles = Array.from({length: COUNT}, () => ({
+        x: Math.random()*W,
+        y: Math.random()*H,
+        vx: (Math.random()-0.5)*0.25,
+        vy: (Math.random()-0.5)*0.25,
+        r: Math.random()*1.6 + 0.8,
+        c: COLORS[Math.floor(Math.random()*COLORS.length)]
+      }));
+    }
+    function step(){
+      ctx.clearRect(0,0,W,H);
+      for(const p of particles){
+        p.x += p.vx; p.y += p.vy;
+        if(p.x < 0 || p.x > W) p.vx *= -1;
+        if(p.y < 0 || p.y > H) p.vy *= -1;
+      }
+      for(let i=0;i<particles.length;i++){
+        for(let j=i+1;j<particles.length;j++){
+          const a = particles[i], b = particles[j];
+          const dx = a.x-b.x, dy = a.y-b.y;
+          const dist = Math.sqrt(dx*dx+dy*dy);
+          if(dist < 130){
+            ctx.strokeStyle = `rgba(139,92,246,${0.14 * (1 - dist/130)})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+      for(const p of particles){
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(${p.c},0.75)`;
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+        ctx.fill();
+      }
+      if(!reduceMotion) requestAnimationFrame(step);
+    }
+
+    window.addEventListener('resize', () => { resize(); });
+    init();
+    step();
+    if(reduceMotion){
+      // draw a single static frame instead of animating
+      step();
+    }
+  })();
+
+  // ===== Cursor glow + click ripple (whole page) =====
+  (function(){
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isTouch = window.matchMedia('(hover: none)').matches;
+    if(reduceMotion) return;
+
+    const glow = document.createElement('div');
+    glow.className = 'cursor-glow';
+    document.body.appendChild(glow);
+
+    let gx = 0, gy = 0, tx = 0, ty = 0;
+    function onMove(x, y){
+      tx = x; ty = y;
+      glow.classList.add('active');
+    }
+    document.addEventListener('mousemove', (e) => onMove(e.clientX, e.clientY));
+    document.addEventListener('mouseleave', () => glow.classList.remove('active'));
+
+    function raf(){
+      gx += (tx - gx) * 0.18;
+      gy += (ty - gy) * 0.18;
+      glow.style.transform = `translate(${gx}px, ${gy}px) translate(-50%,-50%)`;
+      requestAnimationFrame(raf);
+    }
+    raf();
+
+    function ripple(x, y){
+      const ring = document.createElement('div');
+      ring.className = 'cursor-ring';
+      ring.style.left = x + 'px';
+      ring.style.top = y + 'px';
+      document.body.appendChild(ring);
+      setTimeout(() => ring.remove(), 750);
+    }
+    document.addEventListener('click', (e) => ripple(e.clientX, e.clientY));
+    document.addEventListener('touchstart', (e) => {
+      const t = e.touches[0];
+      if(t) ripple(t.clientX, t.clientY);
+    }, {passive:true});
+  })();
+  // ===== Scroll reveal (fade-up) with stagger =====
+  (function(){
+    const items = document.querySelectorAll('.reveal');
+    if(!items.length) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduceMotion){
+      items.forEach(el => el.classList.add('in-view'));
+      return;
+    }
+    // stagger items that share the same parent container
+    const groups = new Map();
+    items.forEach(el => {
+      const parent = el.parentElement;
+      if(!groups.has(parent)) groups.set(parent, []);
+      groups.get(parent).push(el);
+    });
+    groups.forEach(group => {
+      group.forEach((el, i) => {
+        el.style.transitionDelay = Math.min(i * 90, 360) + 'ms';
+      });
+    });
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+    items.forEach(el => io.observe(el));
+  })();
+
+  // ===== Global floating background particles =====
+  (function(){
+    const canvas = document.getElementById('particlesCanvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let W, H, particles = [];
+    const COUNT = 34;
+    const COLORS = ['139,92,246', '34,211,238', '59,130,246'];
+
+    function resize(){
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = document.documentElement.scrollHeight;
+    }
+    function init(){
+      resize();
+      particles = Array.from({length: COUNT}, () => ({
+        x: Math.random()*W,
+        y: Math.random()*H,
+        vy: -(Math.random()*0.12 + 0.03),
+        r: Math.random()*1.4 + 0.6,
+        c: COLORS[Math.floor(Math.random()*COLORS.length)],
+        o: Math.random()*0.35 + 0.15
+      }));
+    }
+    function step(){
+      ctx.clearRect(0,0,W,H);
+      for(const p of particles){
+        p.y += p.vy;
+        if(p.y < -10){ p.y = H + 10; p.x = Math.random()*W; }
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(${p.c},${p.o})`;
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+        ctx.fill();
+      }
+      requestAnimationFrame(step);
+    }
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => { resize(); }, 200);
+    });
+    init();
+    if(!reduceMotion) step(); else step();
+  })();
+</script>
+</body>
+</html>
