@@ -3,7 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rohan Rout — AI/ML Engineer & Mentor</title>
+<title>NextAI Engineer — AI Engineering Mentorship by Rohan Rout</title>
+<meta name="description" content="NextAI Engineer: 1:1 AI engineering mentorship with Rohan Rout. Get clear on which tech stack to learn, build a realistic roadmap and ship real projects.">
+<meta property="og:title" content="NextAI Engineer — AI Engineering Mentorship">
+<meta property="og:description" content="NextAI Engineer: 1:1 AI engineering mentorship with Rohan Rout. Get clear on which tech stack to learn, build a realistic roadmap and ship real projects.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%238B5CF6'/%3E%3Cstop offset='.55' stop-color='%23EC4899'/%3E%3Cstop offset='1' stop-color='%23FB923C'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Cpath d='M9 23V9l14 14V9' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -667,6 +672,13 @@
     .focus-clone{transition:none;}
     .card-dimmed{transition:none;}
   }
+
+  /* NextAI Engineer brand + single-mentor layout */
+  .logo-mark{border-radius:10px;}
+  .logo-mark svg{width:100%;height:100%;display:block;}
+  .logo-word{font-weight:700;letter-spacing:-0.01em;white-space:nowrap;}
+  .logo-ai{background:linear-gradient(90deg,var(--cyan),var(--violet-soft));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .mentors-grid.single{grid-template-columns:1fr;max-width:720px;}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 </head>
@@ -678,12 +690,12 @@
 
 <header class="nav">
   <div class="nav-inner">
-    <a href="#top" class="logo"><span class="logo-mark"><img src="assets/images/rohan-nav-logo.jpg" alt="Rohan Rout"></span> Rohan Rout</a>
+    <a href="#top" class="logo" aria-label="NextAI Engineer home"><span class="logo-mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M9 23V9l14 14V9" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><g fill="#fff"><circle cx="9" cy="9" r="2.4"/><circle cx="9" cy="23" r="2.4"/><circle cx="23" cy="9" r="2.4"/><circle cx="23" cy="23" r="2.4"/></g></svg></span><span class="logo-word">Next<span class="logo-ai">AI</span> Engineer</span></a>
     <nav class="links">
       <a href="#about">About</a>
       <a href="#story">The Spark</a>
       <a href="#help">How I Help</a>
-      <a href="#mentors">Mentors</a>
+      <a href="#mentors">Book</a>
       <a href="#notes">Notes</a>
       <a href="#insights">Insights</a>
       <a href="#contact">Contact</a>
@@ -709,14 +721,14 @@
     </div>
     <div class="wrap hero-grid">
       <div>
-        <span class="eyebrow mono">AI ENGINEERING MENTORSHIP</span>
+        <span class="eyebrow mono">NEXTAI ENGINEER · AI MENTORSHIP</span>
         <div class="stack-tags">
           <span>LLMs</span><span>GenAI</span><span>ML</span><span>Agentic AI</span><span>LangGraph</span><span>MCP</span>
         </div>
-        <h1>Get 1:1 <span class="hl">AI engineering guidance</span> from engineers who've actually shipped it.</h1>
-        <p class="lead">Confused about which tech stack to learn, what to prioritize, or how to actually break in? Book a real conversation with working AI engineers — not another course, a person who answers your specific confusion.</p>
+        <h1>Get 1:1 <span class="hl">AI engineering guidance</span> from an engineer who's actually shipped it.</h1>
+        <p class="lead">Confused about which tech stack to learn, what to prioritize, or how to actually break in? Book a real conversation with a working AI engineer — not another course, a person who answers your specific confusion.</p>
         <div class="cta-row">
-          <a href="#mentors" class="btn btn-primary">Book a Mentor</a>
+          <a href="#mentors" class="btn btn-primary">Book a Session</a>
           <a href="#help" class="btn btn-outline">See What You Can Book</a>
         </div>
       </div>
@@ -744,11 +756,11 @@
   <section id="mentors">
     <div class="wrap">
       <div class="sec-head reveal">
-        <span class="sec-tag mono">// MEET THE MENTORS</span>
-        <h2>Learn from people who've actually shipped this stuff</h2>
-        <p>Two working AI engineers, here to help you cut through the noise — pick whichever fits what you're stuck on.</p>
+        <span class="sec-tag mono">// BOOK A SESSION</span>
+        <h2>Learn from an engineer who's actually shipped this stuff</h2>
+        <p>One working AI engineer, here to help you cut through the noise — book a 1:1 session on exactly what you're stuck on.</p>
       </div>
-      <div class="mentors-grid">
+      <div class="mentors-grid single">
 
         <div class="mentor-card reveal focusable-card">
           <div class="mentor-photo"><img src="assets/images/rohan-mentor-card.jpg" alt="Rohan Rout"></div>
@@ -764,19 +776,7 @@
           </div>
         </div>
 
-        <div class="mentor-card reveal focusable-card">
-          <div class="mentor-photo"><img src="assets/images/rishav-mentor-card.jpg" alt="Rishav Singh"></div>
-          <h3>Rishav Singh</h3>
-          <div class="mentor-role">Lead AI Engineer @ TalentNeuron · AI Architect · Enterprise AI Trainer @ IISc Bangalore</div>
-          <div class="mentor-tags">
-            <span>Multi-Agent Systems</span><span>RAG Architecture</span><span>LLMOps</span><span>MLOps</span><span>AI Training</span>
-          </div>
-          <p class="mentor-bio">5+ years shipping production AI systems, and has personally trained 2,600+ professionals across companies like Adobe, Uber, and NPCI. Great for deeper architecture, production, and career-scaling questions.</p>
-          <div class="mentor-cta">
-            <a class="btn btn-primary booking-btn" data-mentor="Rishav Singh" href="https://wa.me/917098051318?text=Hi%2C%20I%20found%20your%20mentorship%20page%20and%20would%20like%20to%20book%20a%20session%20with%20Rishav." target="_blank" rel="noopener">Book on WhatsApp</a>
-            <span class="mentor-price">₹99 / 20 min</span>
-          </div>
-        </div>
+        
 
       </div>
     </div>
@@ -794,7 +794,7 @@
         <div class="help-card reveal focusable-card">
           <div class="help-mark" style="background:linear-gradient(135deg,var(--violet),var(--pink));">01</div>
           <h3>Tech Stack Clarity Call</h3>
-          <p>Confused between Python vs other languages, TensorFlow vs PyTorch, LangChain vs LangGraph? We help you choose based on where you actually want to go, not by trying everything at once.</p>
+          <p>Confused between Python vs other languages, TensorFlow vs PyTorch, LangChain vs LangGraph? I help you choose based on where you actually want to go, not by trying everything at once.</p>
         </div>
         <div class="help-card reveal focusable-card">
           <div class="help-mark" style="background:linear-gradient(135deg,var(--pink),var(--orange));">02</div>
@@ -804,7 +804,7 @@
         <div class="help-card reveal focusable-card">
           <div class="help-mark" style="background:linear-gradient(135deg,var(--cyan),var(--violet));">03</div>
           <h3>Roadmap & Career Guidance</h3>
-          <p>Get a structured path built for your current level, and learn the mistakes to avoid — the ones that cost us months when we were starting out.</p>
+          <p>Get a structured path built for your current level, and learn the mistakes to avoid — the ones that cost me months when I was starting out.</p>
         </div>
         <div class="help-card reveal focusable-card">
           <div class="help-mark" style="background:linear-gradient(135deg,var(--card-2),var(--violet));">04</div>
@@ -894,7 +894,7 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="sec-tag mono">// FREE RESOURCES</span>
-        <h2>Free notes from your mentors</h2>
+        <h2>Free notes from Rohan</h2>
         <p>Before you even book a session, start here. Tap a topic to expand — each one covers what to focus on, what to skip, and real mistakes made along the way.</p>
       </div>
       <div class="notes-grid">
@@ -967,9 +967,9 @@
   <section id="insights">
     <div class="wrap">
       <div class="sec-head reveal">
-        <span class="sec-tag mono">// FROM YOUR MENTORS</span>
+        <span class="sec-tag mono">// FROM ROHAN</span>
         <h2>Ideas, guidance & things worth reading</h2>
-        <p>Ongoing ideas and honest guidance from us — proof of what you can expect in a real session, not just a taste. Tap any entry to read it in full.</p>
+        <p>Ongoing ideas and honest guidance from me — proof of what you can expect in a real session, not just a taste. Tap any entry to read it in full.</p>
       </div>
       <div class="resource-card reveal">
         <span class="resource-tag">FREE RESOURCE</span>
@@ -1095,7 +1095,7 @@
 
 <footer>
   <div class="wrap footer-inner">
-    <span>© 2026 Rohan Rout · Built with curiosity in Asansol, WB</span>
+    <span>© 2026 NextAI Engineer · by Rohan Rout · Asansol, West Bengal</span>
     <div class="footer-links">
       <a href="https://linkedin.com/in/rohannrout" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://github.com/rohanrout23" target="_blank" rel="noopener">GitHub</a>
@@ -1542,5 +1542,293 @@
     }
   })();
 </script>
+<!-- ===================== AI CHAT WIDGET =====================
+  Paste this whole block into index.html, just ABOVE the closing </body> tag.
+  The ONLY line you need to edit is CHAT_URL near the top of the script.
+  No API keys are used or needed here.
+=========================================================== -->
+<style>
+  .rmchat-btn{
+    position:fixed;right:20px;bottom:20px;z-index:9000;width:58px;height:58px;border:0;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;
+    background:linear-gradient(135deg,var(--violet,#8B5CF6),var(--pink,#EC4899));
+    box-shadow:0 8px 28px rgba(139,92,246,.45);
+    transition:transform .2s ease,box-shadow .2s ease;
+  }
+  .rmchat-btn:hover{transform:translateY(-2px) scale(1.04);box-shadow:0 12px 34px rgba(139,92,246,.55);}
+  .rmchat-btn:focus-visible,.rmchat-close:focus-visible,.rmchat-chip:focus-visible,
+  .rmchat-send:focus-visible,.rmchat-action:focus-visible{outline:3px solid var(--cyan,#22D3EE);outline-offset:2px;}
+  .rmchat-btn svg{width:26px;height:26px;}
+
+  .rmchat-panel{
+    position:fixed;right:20px;bottom:92px;z-index:9000;width:380px;max-width:calc(100vw - 24px);
+    height:min(560px,calc(100vh - 120px));height:min(560px,calc(100dvh - 120px));
+    display:flex;flex-direction:column;overflow:hidden;
+    background:var(--bg-soft,#141230);color:var(--text,#F5F3FF);font-family:inherit;
+    border:1px solid var(--line,rgba(245,243,255,.12));border-radius:20px;
+    box-shadow:0 24px 60px rgba(0,0,0,.55),0 0 40px rgba(139,92,246,.2);
+    opacity:0;transform:translateY(12px) scale(.98);visibility:hidden;pointer-events:none;
+    transition:opacity .22s ease,transform .22s ease,visibility 0s linear .22s;
+  }
+  .rmchat-panel.open{opacity:1;transform:none;visibility:visible;pointer-events:auto;transition-delay:0s;}
+
+  .rmchat-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;
+    border-bottom:1px solid var(--line,rgba(245,243,255,.12));
+    background:linear-gradient(135deg,rgba(139,92,246,.22),rgba(236,72,153,.12));}
+  .rmchat-title{font-weight:700;font-size:.98rem;margin:0;}
+  .rmchat-sub{font-size:.72rem;color:var(--text-dim,rgba(245,243,255,.68));margin:2px 0 0;}
+  .rmchat-close{flex:none;width:32px;height:32px;border:0;border-radius:50%;cursor:pointer;font:inherit;font-size:1.25rem;line-height:1;
+    color:var(--text,#F5F3FF);background:rgba(255,255,255,.08);}
+  .rmchat-close:hover{background:rgba(255,255,255,.16);}
+
+  .rmchat-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth;}
+  .rmchat-msg{max-width:86%;padding:10px 13px;border-radius:14px;font-size:.92rem;line-height:1.5;
+    white-space:pre-wrap;overflow-wrap:anywhere;}
+  .rmchat-bot{align-self:flex-start;background:rgba(255,255,255,.07);border:1px solid var(--line,rgba(245,243,255,.12));border-bottom-left-radius:4px;}
+  .rmchat-user{align-self:flex-end;color:#fff;background:linear-gradient(135deg,var(--violet,#8B5CF6),var(--pink,#EC4899));border-bottom-right-radius:4px;}
+
+  .rmchat-typing{display:flex;gap:5px;align-items:center;padding:13px 14px;}
+  .rmchat-dot{width:7px;height:7px;border-radius:50%;background:var(--violet-soft,#A78BFA);opacity:.5;animation:rmchat-bounce 1s infinite ease-in-out;}
+  .rmchat-dot:nth-child(2){animation-delay:.15s;} .rmchat-dot:nth-child(3){animation-delay:.3s;}
+  @keyframes rmchat-bounce{0%,80%,100%{transform:translateY(0);opacity:.4;}40%{transform:translateY(-4px);opacity:1;}}
+
+  .rmchat-chips,.rmchat-actions{display:flex;flex-wrap:wrap;gap:8px;}
+  .rmchat-chip,.rmchat-action{font:inherit;font-size:.8rem;padding:7px 12px;border-radius:999px;cursor:pointer;text-decoration:none;
+    color:var(--text,#F5F3FF);background:rgba(139,92,246,.14);border:1px solid rgba(139,92,246,.45);transition:background .15s ease;}
+  .rmchat-chip:hover,.rmchat-action:hover{background:rgba(139,92,246,.3);}
+  .rmchat-action{display:inline-block;}
+
+  .rmchat-form{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line,rgba(245,243,255,.12));}
+  .rmchat-input{flex:1;min-width:0;font:inherit;font-size:16px;padding:10px 12px;border-radius:12px;
+    color:var(--text,#F5F3FF);background:rgba(255,255,255,.06);border:1px solid var(--line,rgba(245,243,255,.12));}
+  .rmchat-input::placeholder{color:var(--text-dim2,rgba(245,243,255,.5));}
+  .rmchat-input:focus{outline:none;border-color:var(--violet,#8B5CF6);}
+  .rmchat-send{flex:none;font:inherit;font-weight:600;font-size:.9rem;padding:0 16px;border:0;border-radius:12px;cursor:pointer;color:#fff;
+    background:linear-gradient(135deg,var(--violet,#8B5CF6),var(--pink,#EC4899));}
+  .rmchat-send:disabled,.rmchat-input:disabled{opacity:.55;cursor:not-allowed;}
+  .rmchat-note{margin:0;padding:0 14px 10px;font-size:.68rem;color:var(--text-dim2,rgba(245,243,255,.5));}
+
+  @media (max-width:480px){
+    .rmchat-btn{right:14px;bottom:14px;}
+    .rmchat-panel{right:12px;left:12px;width:auto;bottom:84px;max-width:none;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .rmchat-btn,.rmchat-panel{transition:none;}
+    .rmchat-dot{animation:none;opacity:.8;}
+    .rmchat-msgs{scroll-behavior:auto;}
+  }
+</style>
+
+<script>
+(function () {
+  // ===== The only line you edit: the same web address you used in your PowerShell test =====
+  var CHAT_URL = "https://ulerhkxdpjdwkzgdpwdm.supabase.co/functions/v1/chat";
+  // ===== Optional: contact options shown when the bot has no answer (already public on your site) =====
+  var WHATSAPP_URL = "https://wa.me/917098051318";
+  var EMAIL = "rohanrout522@gmail.com";
+
+  var SUGGESTIONS = ["How much does a session cost?", "What can Rohan help me with?", "How do I book a session?"];
+  var WELCOME = "Hi! I can answer questions about Rohan, his sessions, pricing and how to book. What would you like to know?";
+  var MAX_HISTORY = 6;
+
+  var history = [];
+  var loading = false;
+  var started = false;
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text !== undefined) n.textContent = text;
+    return n;
+  }
+
+  // ----- build the widget -----
+  var btn = el("button", "rmchat-btn");
+  btn.type = "button";
+  btn.setAttribute("aria-label", "Open chat");
+  btn.setAttribute("aria-expanded", "false");
+  btn.setAttribute("aria-controls", "rmchat-panel");
+  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.6-.8L3 21l1.9-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg>';
+
+  var panel = el("div", "rmchat-panel");
+  panel.id = "rmchat-panel";
+  panel.setAttribute("role", "dialog");
+  panel.setAttribute("aria-label", "Chat with the mentorship assistant");
+
+  var head = el("div", "rmchat-head");
+  var headText = el("div");
+  headText.appendChild(el("p", "rmchat-title", "Ask about Rohan"));
+  headText.appendChild(el("p", "rmchat-sub", "Answers come only from this site's information"));
+  var closeBtn = el("button", "rmchat-close", "\u00D7");
+  closeBtn.type = "button";
+  closeBtn.setAttribute("aria-label", "Close chat");
+  head.appendChild(headText);
+  head.appendChild(closeBtn);
+
+  var msgs = el("div", "rmchat-msgs");
+  msgs.setAttribute("role", "log");
+  msgs.setAttribute("aria-live", "polite");
+
+  var form = el("form", "rmchat-form");
+  var input = el("input", "rmchat-input");
+  input.type = "text";
+  input.maxLength = 500;
+  input.placeholder = "Ask a question\u2026";
+  input.autocomplete = "off";
+  input.setAttribute("aria-label", "Your question");
+  var send = el("button", "rmchat-send", "Send");
+  send.type = "submit";
+  form.appendChild(input);
+  form.appendChild(send);
+
+  var note = el("p", "rmchat-note", "Please don't share private details in this chat.");
+
+  panel.appendChild(head);
+  panel.appendChild(msgs);
+  panel.appendChild(form);
+  panel.appendChild(note);
+  document.body.appendChild(panel);
+  document.body.appendChild(btn);
+
+  // ----- helpers -----
+  function scrollDown() { msgs.scrollTop = msgs.scrollHeight; }
+
+  function clean(text) { return String(text).replace(/\*\*(.+?)\*\*/g, "$1").trim(); }
+
+  function addMessage(role, text) {
+    var m = el("div", "rmchat-msg " + (role === "user" ? "rmchat-user" : "rmchat-bot"), clean(text));
+    msgs.appendChild(m);
+    scrollDown();
+    return m;
+  }
+
+  function addContactActions() {
+    var row = el("div", "rmchat-actions");
+    var wa = el("a", "rmchat-action", "Message on WhatsApp");
+    wa.href = WHATSAPP_URL + "?text=" + encodeURIComponent("Hi, I have a question about your AI mentorship.");
+    wa.target = "_blank";
+    wa.rel = "noopener";
+    var mail = el("a", "rmchat-action", "Email us");
+    mail.href = "mailto:" + EMAIL;
+    row.appendChild(wa);
+    row.appendChild(mail);
+    msgs.appendChild(row);
+    scrollDown();
+  }
+
+  function showTyping() {
+    var t = el("div", "rmchat-msg rmchat-bot rmchat-typing");
+    t.setAttribute("aria-label", "Assistant is typing");
+    t.appendChild(el("span", "rmchat-dot"));
+    t.appendChild(el("span", "rmchat-dot"));
+    t.appendChild(el("span", "rmchat-dot"));
+    msgs.appendChild(t);
+    scrollDown();
+    return t;
+  }
+
+  function setLoading(on) {
+    loading = on;
+    input.disabled = on;
+    send.disabled = on;
+  }
+
+  var chipsRow = null;
+  function removeChips() { if (chipsRow) { chipsRow.remove(); chipsRow = null; } }
+
+  function startConversation() {
+    if (started) return;
+    started = true;
+    addMessage("bot", WELCOME);
+    chipsRow = el("div", "rmchat-chips");
+    SUGGESTIONS.forEach(function (q) {
+      var c = el("button", "rmchat-chip", q);
+      c.type = "button";
+      c.addEventListener("click", function () { ask(q); });
+      chipsRow.appendChild(c);
+    });
+    msgs.appendChild(chipsRow);
+  }
+
+  // ----- talking to the chat function -----
+  function ask(question) {
+    question = String(question || "").trim();
+    if (!question || loading) return;
+    removeChips();
+    addMessage("user", question);
+    input.value = "";
+
+    if (CHAT_URL.indexOf("PASTE_") === 0) {
+      console.warn("Chat widget: CHAT_URL has not been set yet.");
+      addMessage("bot", "The chat isn't connected yet: the chat address hasn't been added to this page.");
+      return;
+    }
+
+    setLoading(true);
+    var typing = showTyping();
+    var controller = new AbortController();
+    var timer = setTimeout(function () { controller.abort(); }, 30000);
+
+    fetch(CHAT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: question, history: history.slice(-MAX_HISTORY) }),
+      signal: controller.signal
+    })
+      .then(function (res) {
+        return res.json().catch(function () { return {}; }).then(function (data) { return { ok: res.ok, status: res.status, data: data }; });
+      })
+      .then(function (r) {
+        typing.remove();
+        var answer = r.data && typeof r.data.answer === "string" ? r.data.answer : "";
+        if (!answer) {
+          addMessage("bot", "Sorry, something went wrong. Please try again, or contact us directly.");
+          addContactActions();
+          return;
+        }
+        addMessage("bot", answer);
+        if (r.ok && !r.data.fallback) {
+          history.push({ role: "user", content: question });
+          history.push({ role: "assistant", content: answer });
+          history = history.slice(-MAX_HISTORY);
+        }
+        if (r.data.fallback || r.status >= 429) addContactActions();
+      })
+      .catch(function () {
+        typing.remove();
+        addMessage("bot", "I couldn't reach the server. Please check your connection and try again, or contact us on WhatsApp or by email.");
+        addContactActions();
+      })
+      .then(function () {
+        clearTimeout(timer);
+        setLoading(false);
+        if (panel.classList.contains("open")) input.focus();
+      });
+  }
+
+  // ----- open / close -----
+  function openPanel() {
+    panel.classList.add("open");
+    btn.setAttribute("aria-expanded", "true");
+    btn.setAttribute("aria-label", "Close chat");
+    startConversation();
+    setTimeout(function () { input.focus(); }, 60);
+  }
+  function closePanel() {
+    panel.classList.remove("open");
+    btn.setAttribute("aria-expanded", "false");
+    btn.setAttribute("aria-label", "Open chat");
+    btn.focus();
+  }
+
+  btn.addEventListener("click", function () { panel.classList.contains("open") ? closePanel() : openPanel(); });
+  closeBtn.addEventListener("click", closePanel);
+  form.addEventListener("submit", function (e) { e.preventDefault(); ask(input.value); });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && panel.classList.contains("open")) closePanel();
+  });
+})();
+</script>
+
 </body>
 </html>
