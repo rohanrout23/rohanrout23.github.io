@@ -1160,7 +1160,7 @@
 
       try {
         if(tasks.length > 0){
-          await Promise.all(tasks);
+             const results = await Promise.allSettled(tasks); if(!results.some(function(r){ return r.status === 'fulfilled' && !(r.value && r.value.error) && !(r.value && r.value.ok === false); })){ throw new Error('Message could not be sent'); };
         }
         statusEl.textContent = "Thanks — your message was sent. I'll get back to you soon.";
         statusEl.style.color = '#22D3EE';
