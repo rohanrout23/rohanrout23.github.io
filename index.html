@@ -1,4 +1,4 @@
-<linearGradient id="sGrad" gradientUnits="userSpaceOnUse" x1="40" y1="0" x2="535" y2="0"><stop offset="0" stop-color="#FB923C"/><stop offset=".55" stop-color="#EC4899"/><stop offset="1" stop-color="#22D3EE"/></linearGradient><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -698,7 +698,7 @@
   .t-prompt{color:var(--cyan);font-family:'JetBrains Mono',monospace;margin-right:.6ch;}
   @keyframes tBlink{50%{opacity:0}}
   .mentor-card .js-tilt-glare{border-radius:inherit;}
-  @media (prefers-reduced-motion: reduce){.t-cursor{animation:none}}}
+  @media (prefers-reduced-motion: reduce){.t-cursor{animation:none}}
 
   /* ===== STEP 2: HERO 3D NETWORK ===== */
   #hero3d{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;}
@@ -802,6 +802,7 @@
   .a-x:hover,.a-x:focus-visible{background:rgba(255,255,255,.08);color:var(--text);}
   .a-card h2{font:700 1.4rem 'Space Grotesk',sans-serif;margin:0 0 4px;}
   .a-card .a-sub{color:var(--text-dim);font-size:.92rem;margin:0 0 18px;}
+  .a-tabs[hidden]{display:none;}
   .a-tabs{display:flex;gap:4px;padding:4px;border-radius:12px;background:rgba(255,255,255,.05);margin-bottom:18px;}
   .a-tabs button{all:unset;box-sizing:border-box;flex:1;text-align:center;padding:9px;border-radius:9px;cursor:pointer;font:600 .88rem 'Inter',sans-serif;color:var(--text-dim);}
   .a-tabs button[aria-selected="true"]{background:linear-gradient(135deg,var(--violet),var(--pink));color:#fff;}
@@ -1363,7 +1364,7 @@
     let W, H, particles = [];
     const COLORS = ['139,92,246', '236,72,153', '34,211,238'];
     const COUNT = window.matchMedia('(max-width:860px)').matches ? 22 : 46;
-    window.__WANT3D = !reduceMotion && matchMedia('(min-width:861px) and (hover:hover) and (pointer:fine)').matches && (navigator.hardwareConcurrency||4) >= 4 && (navigator.deviceMemory||4) >= 4 && (function(){try{const c=document.createElement('canvas');return !!(c.getContext('webgl')||c.getContext('experimental-webgl'));}catch(e){return false;}})();
+    window.__WANT3D = !/[?&]lite\b/.test(location.search) && !reduceMotion && matchMedia('(min-width:861px) and (hover:hover) and (pointer:fine)').matches && (navigator.hardwareConcurrency||4) >= 4 && (navigator.deviceMemory||4) >= 4 && (function(){try{const c=document.createElement('canvas');return !!(c.getContext('webgl')||c.getContext('experimental-webgl'));}catch(e){return false;}})();
     let visible = true, looping = false;
 
     function resize(){
@@ -1627,7 +1628,7 @@
 
     function resize(){
       W = canvas.width = window.innerWidth;
-      H = canvas.height = document.documentElement.scrollHeight;
+      H = canvas.height = window.innerHeight;
     }
     function init(){
       resize();
@@ -2047,7 +2048,7 @@
 <script>
 (function(){
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const hasGsap=!!(window.gsap&&window.ScrollTrigger);
+  const hasGsap=!!(window.gsap&&window.ScrollTrigger)&&!/[?&]lite\b/.test(location.search);
   if(hasGsap) gsap.registerPlugin(ScrollTrigger);
   const io=(el,fn,opt)=>{ if(!('IntersectionObserver' in window)){fn(true);return;} new IntersectionObserver(es=>fn(es[0].isIntersecting),opt||{}).observe(el); };
 
@@ -2056,7 +2057,7 @@
   function initHero3D(){
     const hero=document.querySelector('.hero'); if(!hero||!window.THREE) throw new Error('three missing');
     const T=THREE;
-    const cv=document.createElement('canvas');cv.id='hero3d';cv.setAttribute('aria-hidden','true');hero.insertBefore(cv,hero.firstChild);
+    const cv=document.createElement('canvas');cv.id='hero3d';cv.setAttribute('aria-hidden','true');cv.style.cssText='position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none';hero.insertBefore(cv,hero.firstChild);
     const renderer=new T.WebGLRenderer({canvas:cv,alpha:true,antialias:true,powerPreference:'low-power'});
     renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.75));
     const scene=new T.Scene(),camera=new T.PerspectiveCamera(55,1,.1,100);camera.position.z=11;
@@ -2194,7 +2195,7 @@
       else if(cur<.9&&fired){fired=false;quote.classList.remove('spark-show');quote.classList.add('spark-hold');}
       lit+=((fired?1:0)-lit)*.08;draw();requestAnimationFrame(tick);}
     function start(){if(vis&&!document.hidden&&!run){run=true;requestAnimationFrame(tick);}}
-    if(reduce||!(window.gsap&&window.ScrollTrigger)){cur=1;lit=1;litAt=0;draw();return;}
+    if(reduce||!hasGsap){cur=1;lit=1;litAt=0;draw();return;}
     quote.classList.add('spark-hold');draw();
     ScrollTrigger.create({trigger:'#spark',start:'top 80%',end:'bottom 45%',scrub:true,onUpdate:s=>{target=s.progress;}});
     io(cv,v=>{vis=v;if(v)start();else run=false;});
@@ -2324,7 +2325,7 @@
     $('aTabs').hidden=!(v==='signin'||v==='signup');
     modal.querySelectorAll('#aTabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.go===v));
     $('aTitle').textContent=titles[v][0];$('aSub').textContent=titles[v][1];
-    $('aNotice').hidden=!!sb;
+    $('aNotice').hidden=!!sb;if(!sb)$('aNotice').textContent=(typeof supabase==='undefined')?'The login service could not load. Check your internet connection or ad blocker, then refresh the page.':'Login is not connected yet. Add your Supabase URL and anon key to the page and run supabase_auth_setup.sql.';
     if(v==='account'&&user){$('acEmail').textContent=user.email;$('acName').value=(user.user_metadata&&user.user_metadata.full_name)||'';
       $('acSince').textContent='Member since '+new Date(user.created_at).toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'});}
     const f=modal.querySelector('.a-view[data-view="'+v+'"] input');if(f)setTimeout(()=>f.focus(),30);
@@ -2346,7 +2347,7 @@
     const btn=form.querySelector('.a-submit'),txt=btn.textContent;
     if(!sb){msg('Login is not connected yet.','err');return;}
     btn.disabled=true;btn.textContent='Please wait...';msg('');
-    try{await fn();}catch(err){msg(friendly(err),'err');}
+    try{await fn();}catch(err){console.error('[auth]',err);msg(friendly(err),'err');}
     finally{btn.disabled=false;btn.textContent=txt;}
   }
   const form=v=>modal.querySelector('.a-view[data-view="'+v+'"]');
