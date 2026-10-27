@@ -825,6 +825,9 @@
   .a-out{margin-top:10px;width:100%;padding:12px;border-radius:12px;cursor:pointer;font:600 .95rem 'Inter',sans-serif;background:transparent;border:1px solid var(--line);color:var(--text);}
   .a-out:hover{border-color:#FB7185;color:#FB7185;}
   @media (prefers-reduced-motion: reduce){.a-card{animation:none}}
+  header, nav { z-index: 99999 !important; }
+.a-menu { z-index: 100000 !important; pointer-events: auto !important; }
+.a-menu button { pointer-events: auto !important; cursor: pointer; position: relative; z-index: 100001; }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 </head>
