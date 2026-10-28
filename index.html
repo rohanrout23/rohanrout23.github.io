@@ -1209,7 +1209,22 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- CONTACT --><!-- RESUME REVIEW -->
+<section id="resume-review">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag mono">// FREE RESUME REVIEW</span>
+      <h2>Get your resume reviewed by Rohan</h2>
+      <p>Upload your resume — your first review is free. I'll personally go through it and send you honest, specific feedback.</p>
+    </div>
+    <div class="resource-card reveal">
+      <input type="file" id="resumeFile" accept="application/pdf" style="margin-bottom:16px;">
+      <button class="btn btn-primary" id="resumeSubmitBtn">Upload for Free Review</button>
+      <div id="resumeStatus" style="margin-top:16px;color:var(--text-dim);font-size:0.95rem;"></div>
+      <div id="resumeFeedbackBox" style="margin-top:20px;"></div>
+    </div>
+  </div>
+</section>
   <section class="contact" id="contact">
     <div class="wrap">
       <div class="sec-head reveal">
@@ -2419,5 +2434,91 @@
 })();
 </script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "29f535859a5d4e88b295548853034e53"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+(function(){
+  const btn = document.getElementById('resumeSubmitBtn');
+  const fileInput = document.getElementById('resumeFile');
+  const statusEl = document.getElementById('resumeStatus');
+  const feedbackBox = document.getElementById('resumeFeedbackBox');
+  if(!btn) return;
+
+  async function loadExistingReview(userId) {
+    const { data } = await supabaseClient
+      .from('resume_reviews')
+      .select('*')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    if (data) {
+      if (data.status === 'reviewed') {
+        feedbackBox.innerHTML = '<h4 style="color:var(--cyan);margin-bottom:8px;">Your Feedback</h4><p style="white-space:pre-wrap;color:var(--text);">' + data.feedback + '</p>';
+      } else {
+        statusEl.textContent = "Your resume is uploaded and pending review. I'll get back to you soon!";
+      }
+      btn.style.display = 'none';
+      fileInput.style.display = 'none';
+    }
+  }
+
+  btn.addEventListener('click', async () => {
+    if (!supabaseClient) { statusEl.textContent = "Please try again shortly."; return; }
+    const { data: sessionData } = await supabaseClient.auth.getSession();
+    if (!sessionData.session) {
+      statusEl.textContent = "Please log in first.";
+      return;
+    }
+    const user = sessionData.session.user;
+
+    const file = fileInput.files[0];
+    if (!file) { statusEl.textContent = "Please choose a PDF file."; return; }
+    if (file.type !== 'application/pdf') { statusEl.textContent = "Please upload a PDF."; return; }
+
+    btn.disabled = true;
+    statusEl.textContent = "Uploading...";
+
+    const filePath = user.id + '/' + Date.now() + '_' + file.name;
+
+    const { error: uploadErr } = await supabaseClient.storage
+      .from('resumes')
+      .upload(filePath, file);
+
+    if (uploadErr) {
+      console.error(uploadErr);
+      statusEl.textContent = "Upload failed, please try again.";
+      btn.disabled = false;
+      return;
+    }
+
+    const { error: insertErr } = await supabaseClient
+      .from('resume_reviews')
+      .insert([{
+        user_id: user.id,
+        user_email: user.email,
+        file_path: filePath,
+        file_name: file.name,
+        status: 'pending'
+      }]);
+
+    if (insertErr) {
+      console.error(insertErr);
+      statusEl.textContent = "Something went wrong saving your request.";
+      btn.disabled = false;
+      return;
+    }
+
+    statusEl.textContent = "Uploaded! I'll review it and get back to you soon.";
+    btn.style.display = 'none';
+    fileInput.style.display = 'none';
+  });
+
+  if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+    supabaseClient.auth.getSession().then(({ data }) => {
+      if (data.session) loadExistingReview(data.session.user.id);
+    });
+  }
+})();
+</script>
 </body>
 </html>
