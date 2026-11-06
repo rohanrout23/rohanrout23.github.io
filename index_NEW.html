@@ -825,6 +825,9 @@
   .a-out{margin-top:10px;width:100%;padding:12px;border-radius:12px;cursor:pointer;font:600 .95rem 'Inter',sans-serif;background:transparent;border:1px solid var(--line);color:var(--text);}
   .a-out:hover{border-color:#FB7185;color:#FB7185;}
   @media (prefers-reduced-motion: reduce){.a-card{animation:none}}
+  header, nav { z-index: 99999 !important; }
+.a-menu { z-index: 100000 !important; pointer-events: auto !important; }
+.a-menu button { pointer-events: auto !important; cursor: pointer; position: relative; z-index: 100001; }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 </head>
@@ -844,6 +847,7 @@
       <a href="#book">Book</a>
       <a href="#notes">Notes</a>
       <a href="#insights">Insights</a>
+      <a href="#free-review">Free Review</a>
       <a href="#contact">Contact</a>
     </nav>
     <div class="auth-nav" id="authNav"></div>
@@ -894,6 +898,94 @@
 
 
   <!-- STEP 3: TECH STACK ORBIT -->
+  <!-- FREE RESUME REVIEW PROMO -->
+<style>
+  .promo{padding:20px 0 8px;}
+  .promo-card{
+    position:relative;overflow:hidden;border-radius:26px;padding:40px 44px;
+    display:grid;grid-template-columns:1.3fr .7fr;gap:32px;align-items:center;
+    background:linear-gradient(135deg,rgba(139,92,246,.22),rgba(236,72,153,.16) 60%,rgba(251,146,60,.12));
+    border:1px solid rgba(236,72,153,.45);
+    box-shadow:0 0 60px rgba(236,72,153,.22),0 20px 50px rgba(0,0,0,.4);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  }
+  .promo-card::before{
+    content:"";position:absolute;width:260px;height:260px;top:-90px;right:-70px;border-radius:50%;
+    background:linear-gradient(135deg,var(--violet),var(--pink));filter:blur(95px);opacity:.45;pointer-events:none;
+  }
+  .promo-badge{
+    display:inline-block;position:relative;font:600 .75rem 'JetBrains Mono',monospace;letter-spacing:.08em;
+    padding:6px 14px;border-radius:999px;color:#fff;margin-bottom:16px;
+    background:linear-gradient(135deg,var(--orange),var(--pink));
+  }
+  .promo-card h2{position:relative;font-size:clamp(1.7rem,3.6vw,2.5rem);line-height:1.15;}
+  .promo-card h2 .hl{
+    background:linear-gradient(120deg,var(--violet-soft),var(--pink) 55%,var(--orange));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .promo-card p{position:relative;margin:14px 0 0;color:var(--text-dim);font-size:1.05rem;max-width:52ch;}
+  .promo-points{position:relative;list-style:none;margin:18px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px;}
+  .promo-points li{
+    font:500 .8rem 'JetBrains Mono',monospace;color:var(--text);padding:6px 12px;border-radius:999px;
+    border:1px solid var(--line);background:rgba(255,255,255,.05);
+  }
+  .promo-points li::before{content:"✓ ";color:var(--cyan);}
+  .promo-action{position:relative;text-align:center;}
+  .promo-action .btn{width:100%;justify-content:center;font-size:1.05rem;padding:16px 26px;}
+  .promo-note{margin-top:12px;font-size:.82rem;color:var(--text-dim2);}
+  @media(max-width:800px){
+    .promo-card{grid-template-columns:1fr;padding:30px 24px;}
+  }
+</style>
+
+<section class="promo" id="free-review">
+  <div class="wrap">
+    <div class="promo-card reveal">
+      <div>
+        <span class="promo-badge">FREE · YOUR FIRST REVIEW</span>
+        <h2>Your first resume review by Rohan is <span class="hl">completely free</span></h2>
+        <p>Upload your resume and I'll personally go through it and send you honest, specific feedback you can act on.</p>
+        <ul class="promo-points">
+          <li>Reviewed by a working GenAI engineer</li>
+          <li>Specific, not generic feedback</li>
+          <li>No payment needed</li>
+        </ul>
+      </div>
+      <div class="promo-action">
+        <button type="button" class="btn btn-primary" id="promoUploadBtn">Upload Your Resume ↑</button>
+        <div class="promo-note">PDF only · Free account required</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  const b = document.getElementById('promoUploadBtn');
+  if(!b) return;
+  b.addEventListener('click', async function(){
+    let session = null;
+    try {
+      if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+        const r = await supabaseClient.auth.getSession();
+        session = r.data.session;
+      }
+    } catch(e) {}
+
+    // Not logged in: open the Sign up popup
+    if (!session) {
+      const signup = document.querySelector('#authNav .a-btn.primary');
+      if (signup) { signup.click(); return; }
+    }
+
+    // Logged in: go to the upload section and open the file picker
+    const sec = document.getElementById('resume-review');
+    if (sec) sec.scrollIntoView({behavior:'smooth', block:'center'});
+    const fi = document.getElementById('resumeFile');
+    if (fi && fi.style.display !== 'none') setTimeout(function(){ fi.click(); }, 700);
+  });
+})();
+</script>
   <section id="stack" class="stack-orbit">
     <div class="wrap">
       <div class="sec-head reveal">
@@ -1023,7 +1115,7 @@
             <a class="pill-link" href="assets/docs/Rohan_Rout_Resume.pdf" download="Rohan_Rout_Resume.pdf">Download Resume ↓</a>
             <a class="pill-link" href="https://github.com/rohanrout23" target="_blank" rel="noopener">GitHub ↗</a>
             <a class="pill-link" href="https://www.instagram.com/rohannrout" target="_blank" rel="noopener">Instagram ↗</a>
-            <a class="pill-link" href="mailto:rohanrout522@gmail.com?subject=NextAI%20Engineer%20-%20mentorship%20question" aria-label="Email Rohan">Email ↗</a>
+            <a class="pill-link" href="mailto:nextaiengineers@gmail.com?subject=NextAI%20Engineer%20-%20mentorship%20question" aria-label="Email Rohan">Email ↗</a>
           </div>
         </div>
       </div>
@@ -1206,7 +1298,22 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- CONTACT --><!-- RESUME REVIEW -->
+<section id="resume-review">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag mono">// FREE RESUME REVIEW</span>
+      <h2>Get your resume reviewed by Rohan</h2>
+      <p>Upload your resume — your first review is free. I'll personally go through it and send you honest, specific feedback.</p>
+    </div>
+    <div class="resource-card reveal">
+      <input type="file" id="resumeFile" accept="application/pdf" style="margin-bottom:16px;">
+      <button class="btn btn-primary" id="resumeSubmitBtn">Upload for Free Review</button>
+      <div id="resumeStatus" style="margin-top:16px;color:var(--text-dim);font-size:0.95rem;"></div>
+      <div id="resumeFeedbackBox" style="margin-top:20px;"></div>
+    </div>
+  </div>
+</section>
   <section class="contact" id="contact">
     <div class="wrap">
       <div class="sec-head reveal">
@@ -1242,7 +1349,7 @@
         <div class="contact-side">
           <h3>Prefer email?</h3>
           <p>You can also reach me directly — I read every message.</p>
-          <a class="direct-email" href="mailto:rohanrout522@gmail.com">rohanrout522@gmail.com ↗</a>
+          <a class="direct-email" href="mailto:nextaiengineers@gmail.com">nextaiengineers@gmail.com ↗</a>
           <p style="margin-top:22px;">Stuck on something, have an idea, or just want to talk AI engineering? Reach out over <strong>email</strong>, <strong>Instagram</strong>, or <strong>LinkedIn</strong> — whichever's easiest for you.</p>
           <div class="about-links" style="margin-top:14px;">
             <a class="pill-link" href="https://www.instagram.com/rohannrout" target="_blank" rel="noopener">Instagram ↗</a>
@@ -1262,7 +1369,7 @@
       <a href="https://linkedin.com/in/rohannrout" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://github.com/rohanrout23" target="_blank" rel="noopener">GitHub</a>
       <a href="https://www.instagram.com/rohannrout" target="_blank" rel="noopener">Instagram</a>
-      <a href="mailto:rohanrout522@gmail.com?subject=NextAI%20Engineer%20-%20mentorship%20question" aria-label="Email Rohan">Email</a>
+      <a href="mailto:nextaiengineers@gmail.com?subject=NextAI%20Engineer%20-%20mentorship%20question" aria-label="Email Rohan">Email</a>
     </div>
   </div>
 </footer>
@@ -1307,8 +1414,8 @@
 
       // No backend configured yet: open the visitor's email app instead of pretending it was sent
       if(!supabaseClient && !hasFormspree){
-        window.location.href = 'mailto:rohanrout522@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-        show("Your email app should open with your message ready. Just press send. If nothing opens, email rohanrout522@gmail.com directly.", '#22D3EE');
+        window.location.href = 'mailto:nextaiengineers@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        show("Your email app should open with your message ready. Just press send. If nothing opens, email nextaiengineers@gmail.com directly.", '#22D3EE');
         btn.disabled = false; btn.textContent = 'Send Message';
         return;
       }
@@ -1789,7 +1896,7 @@
   var CHAT_URL = "https://ulerhkxdpjdwkzgdpwdm.supabase.co/functions/v1/chat";
   // ===== Optional: contact options shown when the bot has no answer (already public on your site) =====
   var WHATSAPP_URL = "https://wa.me/917098051318";
-  var EMAIL = "rohanrout522@gmail.com";
+  var EMAIL = "nextaiengineers@gmail.com";
 
   var SUGGESTIONS = ["How much does a session cost?", "What can Rohan help me with?", "How do I book a session?"];
   var WELCOME = "Hi! I can answer questions about Rohan, his sessions, pricing and how to book. What would you like to know?";
@@ -2416,5 +2523,91 @@
 })();
 </script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "29f535859a5d4e88b295548853034e53"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+(function(){
+  const btn = document.getElementById('resumeSubmitBtn');
+  const fileInput = document.getElementById('resumeFile');
+  const statusEl = document.getElementById('resumeStatus');
+  const feedbackBox = document.getElementById('resumeFeedbackBox');
+  if(!btn) return;
+
+  async function loadExistingReview(userId) {
+    const { data } = await supabaseClient
+      .from('resume_reviews')
+      .select('*')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    if (data) {
+      if (data.status === 'reviewed') {
+        feedbackBox.innerHTML = '<h4 style="color:var(--cyan);margin-bottom:8px;">Your Feedback</h4><p style="white-space:pre-wrap;color:var(--text);">' + data.feedback + '</p>';
+      } else {
+        statusEl.textContent = "Your resume is uploaded and pending review. I'll get back to you soon!";
+      }
+      btn.style.display = 'none';
+      fileInput.style.display = 'none';
+    }
+  }
+
+  btn.addEventListener('click', async () => {
+    if (!supabaseClient) { statusEl.textContent = "Please try again shortly."; return; }
+    const { data: sessionData } = await supabaseClient.auth.getSession();
+    if (!sessionData.session) {
+      statusEl.textContent = "Please log in first.";
+      return;
+    }
+    const user = sessionData.session.user;
+
+    const file = fileInput.files[0];
+    if (!file) { statusEl.textContent = "Please choose a PDF file."; return; }
+    if (file.type !== 'application/pdf') { statusEl.textContent = "Please upload a PDF."; return; }
+
+    btn.disabled = true;
+    statusEl.textContent = "Uploading...";
+
+    const filePath = user.id + '/' + Date.now() + '_' + file.name;
+
+    const { error: uploadErr } = await supabaseClient.storage
+      .from('resumes')
+      .upload(filePath, file);
+
+    if (uploadErr) {
+      console.error(uploadErr);
+      statusEl.textContent = "Upload failed, please try again.";
+      btn.disabled = false;
+      return;
+    }
+
+    const { error: insertErr } = await supabaseClient
+      .from('resume_reviews')
+      .insert([{
+        user_id: user.id,
+        user_email: user.email,
+        file_path: filePath,
+        file_name: file.name,
+        status: 'pending'
+      }]);
+
+    if (insertErr) {
+      console.error(insertErr);
+      statusEl.textContent = "Something went wrong saving your request.";
+      btn.disabled = false;
+      return;
+    }
+
+    statusEl.textContent = "Uploaded! I'll review it and get back to you soon.";
+    btn.style.display = 'none';
+    fileInput.style.display = 'none';
+  });
+
+  if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+    supabaseClient.auth.getSession().then(({ data }) => {
+      if (data.session) loadExistingReview(data.session.user.id);
+    });
+  }
+})();
+</script>
 </body>
 </html>
