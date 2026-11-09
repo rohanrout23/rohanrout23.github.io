@@ -775,6 +775,17 @@
   }
 
   /* ===== STEP 6: RAG-STYLE CARDS ===== */
+    .help-grid{perspective:1000px;}
+  .help-card.h3d-pre{opacity:0;transform:translateY(46px) rotateX(-28deg) scale(.94);transform-origin:50% 0;will-change:transform,opacity;}
+  .help-card.h3d-anim{backdrop-filter:none;-webkit-backdrop-filter:none;will-change:transform,opacity;
+    transition:transform .6s cubic-bezier(.22,1,.36,1) var(--d,0ms),opacity .45s ease-out var(--d,0ms);}
+  .focus-clone{transform:none!important;}
+  @media (hover:hover) and (pointer:fine){
+    .help-card.h3d-done.fl{animation:hFloat 7s ease-in-out infinite;animation-delay:calc(var(--i,0)*-1.7s);}
+    .help-card.h3d-done.fl:hover{animation-play-state:paused;}
+  }
+  @keyframes hFloat{0%,100%{translate:0 0;}50%{translate:0 -7px;}}
+  @media (prefers-reduced-motion:reduce){.help-card.fl{animation:none!important;}}
   .help-card{position:relative;}
   .rag-badge{position:absolute;top:14px;right:14px;font:500 .7rem 'JetBrains Mono',monospace;color:var(--cyan);background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.4);border-radius:999px;padding:3px 10px;opacity:0;pointer-events:none;}
   .help-card.retrieved{animation:ragFlash 1.2s ease;}
@@ -828,6 +839,21 @@
   header, nav { z-index: 99999 !important; }
 .a-menu { z-index: 100000 !important; pointer-events: auto !important; }
 .a-menu button { pointer-events: auto !important; cursor: pointer; position: relative; z-index: 100001; }
+  /* ===== Nav spacing fix (8 links) ===== */
+header.nav .nav-inner{max-width:1320px;gap:36px;}
+header.nav .logo{flex-shrink:0;}
+header.nav .logo-word{white-space:nowrap;}
+header.nav nav.links{gap:22px;font-size:0.92rem;white-space:nowrap;}
+header.nav nav.links a{white-space:nowrap;}
+header.nav .auth-nav{flex-shrink:0;}
+.a-btn{white-space:nowrap;}
+@media(max-width:1240px){
+  header.nav .nav-inner{gap:20px;}
+  header.nav nav.links{gap:15px;font-size:0.86rem;}
+}
+@media(max-width:1000px){
+  header.nav nav.links{display:none;}
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 </head>
@@ -857,7 +883,23 @@
 <main id="top">
 
   <!-- HERO -->
+  <style>
+  .free-chip{position:absolute;z-index:3;top:12px;right:max(14px,calc((100% - 1080px)/2 + 28px));display:inline-flex;align-items:center;gap:7px;padding:6px 8px 6px 12px;border-radius:999px;
+    font:600 .76rem 'Inter',sans-serif;color:#fff;text-decoration:none;white-space:nowrap;
+    background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.04));backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%);
+    border:1px solid rgba(251,146,60,.55);box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 6px 22px rgba(251,146,60,.28);
+    animation:fcFloat 3.4s ease-in-out infinite;transition:transform .2s,box-shadow .2s;}
+  .free-chip:hover{transform:translateY(-2px) scale(1.05);box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 10px 30px rgba(251,146,60,.55);}
+  .free-chip .fc-dot{width:7px;height:7px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 0 rgba(251,146,60,.8);animation:fcPing 1.8s infinite;}
+  .free-chip b{padding:2px 9px;border-radius:999px;font:700 .68rem 'JetBrains Mono',monospace;letter-spacing:.1em;background:linear-gradient(135deg,var(--orange),var(--pink));}
+  @keyframes fcFloat{0%,100%{translate:0 0;}50%{translate:0 -4px;}}
+  @keyframes fcPing{0%{box-shadow:0 0 0 0 rgba(251,146,60,.8);}80%,100%{box-shadow:0 0 0 9px rgba(251,146,60,0);}}
+  @media(max-width:480px){.free-chip{font-size:.7rem;padding:5px 7px 5px 10px;}}
+  @media (prefers-reduced-motion:reduce){.free-chip,.free-chip .fc-dot{animation:none;}}
+</style>
+
   <section class="hero">
+    <a href="#free-review" class="free-chip" aria-label="Your first resume review is free. See the offer."><span class="fc-dot" aria-hidden="true"></span>🎁 First resume review <b>FREE</b></a>
     <canvas id="neuralCanvas"></canvas>
     <div class="floating-terms" aria-hidden="true">
       <span style="top:8%;left:3%;font-size:0.8rem;animation-duration:16s;">RAG</span>
@@ -900,54 +942,78 @@
   <!-- STEP 3: TECH STACK ORBIT -->
   <!-- FREE RESUME REVIEW PROMO -->
 <style>
-  .promo{padding:20px 0 8px;}
-  .promo-card{
-    position:relative;overflow:hidden;border-radius:26px;padding:40px 44px;
-    display:grid;grid-template-columns:1.3fr .7fr;gap:32px;align-items:center;
-    background:linear-gradient(135deg,rgba(139,92,246,.22),rgba(236,72,153,.16) 60%,rgba(251,146,60,.12));
-    border:1px solid rgba(236,72,153,.45);
-    box-shadow:0 0 60px rgba(236,72,153,.22),0 20px 50px rgba(0,0,0,.4);
-    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  }
-  .promo-card::before{
-    content:"";position:absolute;width:260px;height:260px;top:-90px;right:-70px;border-radius:50%;
-    background:linear-gradient(135deg,var(--violet),var(--pink));filter:blur(95px);opacity:.45;pointer-events:none;
-  }
-  .promo-badge{
-    display:inline-block;position:relative;font:600 .75rem 'JetBrains Mono',monospace;letter-spacing:.08em;
-    padding:6px 14px;border-radius:999px;color:#fff;margin-bottom:16px;
-    background:linear-gradient(135deg,var(--orange),var(--pink));
-  }
-  .promo-card h2{position:relative;font-size:clamp(1.7rem,3.6vw,2.5rem);line-height:1.15;}
-  .promo-card h2 .hl{
-    background:linear-gradient(120deg,var(--violet-soft),var(--pink) 55%,var(--orange));
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  .promo-card p{position:relative;margin:14px 0 0;color:var(--text-dim);font-size:1.05rem;max-width:52ch;}
-  .promo-points{position:relative;list-style:none;margin:18px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px;}
-  .promo-points li{
-    font:500 .8rem 'JetBrains Mono',monospace;color:var(--text);padding:6px 12px;border-radius:999px;
-    border:1px solid var(--line);background:rgba(255,255,255,.05);
-  }
-  .promo-points li::before{content:"✓ ";color:var(--cyan);}
-  .promo-action{position:relative;text-align:center;}
-  .promo-action .btn{width:100%;justify-content:center;font-size:1.05rem;padding:16px 26px;}
-  .promo-note{margin-top:12px;font-size:.82rem;color:var(--text-dim2);}
-  @media(max-width:800px){
-    .promo-card{grid-template-columns:1fr;padding:30px 24px;}
-  }
+  .promo{padding:14px 0 4px;}
+  .promo-card{position:relative;overflow:hidden;border-radius:24px;padding:20px 30px;display:grid;grid-template-columns:150px 1fr auto;gap:26px;align-items:center;
+    background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.035) 55%,rgba(255,255,255,.08));
+    backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);
+    border:1px solid rgba(255,255,255,.2);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -1px 0 rgba(255,255,255,.05),0 20px 50px rgba(0,0,0,.4),0 0 50px rgba(139,92,246,.25);}
+  .pg-orb{position:absolute;border-radius:50%;pointer-events:none;filter:blur(38px);opacity:.55;}
+  .pg-orb.o1{width:170px;height:170px;left:-40px;top:-60px;background:var(--violet);animation:pgDrift 9s ease-in-out infinite;}
+  .pg-orb.o2{width:150px;height:150px;right:18%;bottom:-80px;background:var(--pink);animation:pgDrift 11s ease-in-out infinite reverse;}
+  .pg-orb.o3{width:120px;height:120px;right:-30px;top:-40px;background:var(--orange);opacity:.4;animation:pgDrift 13s ease-in-out infinite;}
+  .promo-card::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.10) 50%,transparent 65%);transform:translateX(-120%);animation:pgSweep 6s ease-in-out infinite;}
+  .promo-card>*{position:relative;z-index:1;}
+  .promo-card>.pg-orb{position:absolute;z-index:0;}
+  /* 3D scene */
+  .pg-scene{height:132px;perspective:620px;}
+  .pg-tilt{width:100%;height:100%;transform-style:preserve-3d;transition:transform .25s ease-out;}
+  .pg-sway{position:relative;width:100%;height:100%;transform-style:preserve-3d;animation:pgSway 7s ease-in-out infinite;}
+  .pg-doc{position:absolute;left:28px;top:4px;width:94px;height:124px;border-radius:12px;padding:14px 12px;
+    background:linear-gradient(160deg,rgba(255,255,255,.34),rgba(255,255,255,.08));backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,.45);box-shadow:0 14px 30px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.5);}
+  .pg-doc.back{transform:translate3d(16px,-6px,-34px) rotate(7deg);opacity:.55;}
+  .pg-doc.front{transform:translateZ(8px);overflow:hidden;}
+  .pg-doc i{display:block;height:6px;border-radius:3px;margin-bottom:8px;background:rgba(255,255,255,.55);}
+  .pg-doc i:first-child{width:50%;height:8px;background:linear-gradient(90deg,var(--cyan),var(--violet-soft));}
+  .pg-doc i.s{width:68%;}
+  .pg-scan{position:absolute;left:0;right:0;top:0;height:3px;background:var(--cyan);box-shadow:0 0 14px 4px rgba(34,211,238,.8);animation:pgScan 2.6s ease-in-out infinite;}
+  .pg-chip{position:absolute;display:grid;place-items:center;font:700 .72rem 'Space Grotesk',sans-serif;color:#fff;border-radius:999px;}
+  .pg-chip.free{right:6px;top:0;width:46px;height:46px;transform:translateZ(64px) rotate(12deg);background:linear-gradient(135deg,var(--orange),var(--pink));box-shadow:0 6px 18px rgba(236,72,153,.6);animation:pgBob 3s ease-in-out infinite;}
+  .pg-chip.ok{left:6px;bottom:6px;width:32px;height:32px;transform:translateZ(46px);color:#06231f;font-size:.95rem;background:#34D399;box-shadow:0 6px 16px rgba(52,211,153,.55);animation:pgBob 3.6s ease-in-out infinite reverse;}
+  .pg-ring{position:absolute;left:4px;top:-2px;width:132px;height:132px;border-radius:50%;border:1.5px solid rgba(34,211,238,.5);box-shadow:0 0 16px rgba(34,211,238,.35),inset 0 0 16px rgba(34,211,238,.2);transform:translateZ(-8px) rotateX(72deg);animation:pgRing 8s linear infinite;pointer-events:none;}
+  .pg-ring::after{content:"";position:absolute;left:50%;top:-5px;width:9px;height:9px;margin-left:-4.5px;border-radius:50%;background:#fff;box-shadow:0 0 12px 3px var(--cyan);}
+  .pg-gem{position:absolute;right:4px;bottom:22px;width:14px;height:14px;transform:translateZ(34px) rotate(45deg);background:linear-gradient(135deg,#fff,var(--cyan));box-shadow:0 0 16px rgba(34,211,238,.8);animation:pgBob 2.8s ease-in-out infinite;}
+  /* text */
+  .promo-badge{display:inline-block;font:700 .68rem 'JetBrains Mono',monospace;letter-spacing:.08em;padding:4px 11px;border-radius:999px;color:#fff;margin-bottom:8px;background:linear-gradient(135deg,var(--orange),var(--pink));box-shadow:0 4px 14px rgba(236,72,153,.4);}
+  .promo-card h2{font-size:clamp(1.25rem,2.6vw,1.75rem);line-height:1.18;}
+  .promo-card h2 .hl{background:linear-gradient(120deg,var(--cyan),var(--violet-soft) 30%,var(--pink) 65%,var(--orange));background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:pgText 5s linear infinite;}
+  .promo-card p{margin:7px 0 0;color:var(--text-dim);font-size:.94rem;max-width:56ch;}
+  .promo-points{list-style:none;margin:11px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:7px;}
+  .promo-points li{font:500 .72rem 'JetBrains Mono',monospace;color:var(--text);padding:4px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.07);}
+  .promo-points li::before{content:"\2713 ";color:var(--cyan);}
+  .promo-action{text-align:center;min-width:190px;}
+  .promo-action .btn{width:100%;justify-content:center;font-size:1rem;padding:14px 22px;animation:pgGlow 2.4s ease-in-out infinite;}
+  .promo-note{margin-top:8px;font-size:.76rem;color:var(--text-dim2);}
+  @keyframes pgDrift{0%,100%{transform:translate(0,0);}50%{transform:translate(30px,18px);}}
+  @keyframes pgSweep{0%,55%{transform:translateX(-120%);}100%{transform:translateX(120%);}}
+  @keyframes pgSway{0%,100%{transform:rotateY(-22deg) rotateX(8deg);}50%{transform:rotateY(-4deg) rotateX(14deg);}}
+  @keyframes pgScan{0%,100%{top:0;}50%{top:118px;}}
+  @keyframes pgRing{to{transform:translateZ(-8px) rotateX(72deg) rotateZ(360deg);}}
+  @keyframes pgBob{0%,100%{margin-top:0;}50%{margin-top:-7px;}}
+  @keyframes pgText{to{background-position:200% 0;}}
+  @keyframes pgGlow{0%,100%{box-shadow:0 6px 20px rgba(236,72,153,.35);}50%{box-shadow:0 6px 32px rgba(251,146,60,.65);}}
+  @media(max-width:900px){.promo-card{grid-template-columns:130px 1fr;}.promo-action{grid-column:1/-1;}}
+  @media(max-width:620px){.promo-card{grid-template-columns:1fr;padding:20px;gap:14px;}.pg-scene{display:none;}}
+  @media (prefers-reduced-motion:reduce){.promo-card::after,.pg-orb,.pg-sway,.pg-scan,.pg-chip,.pg-ring,.pg-gem,.promo-card h2 .hl,.promo-action .btn{animation:none;}}
 </style>
 
 <section class="promo" id="free-review">
   <div class="wrap">
     <div class="promo-card reveal">
+      <span class="pg-orb o1"></span><span class="pg-orb o2"></span><span class="pg-orb o3"></span>
+      <div class="pg-scene" aria-hidden="true"><div class="pg-tilt" id="pgTilt"><div class="pg-sway">
+        <div class="pg-doc back"></div>
+        <div class="pg-doc front"><span class="pg-scan"></span><i></i><i></i><i class="s"></i><i></i><i class="s"></i><i></i></div>
+        <span class="pg-chip free">FREE</span><span class="pg-chip ok">✓</span><span class="pg-ring"></span><span class="pg-gem"></span>
+      </div></div></div>
       <div>
-        <span class="promo-badge">FREE · YOUR FIRST REVIEW</span>
+        <span class="promo-badge">🎁 FREE · YOUR FIRST REVIEW</span>
         <h2>Your first resume review by Rohan is <span class="hl">completely free</span></h2>
         <p>Upload your resume and I'll personally go through it and send you honest, specific feedback you can act on.</p>
         <ul class="promo-points">
           <li>Reviewed by a working GenAI engineer</li>
-          <li>Specific, not generic feedback</li>
+          <li>Specific, not generic</li>
           <li>No payment needed</li>
         </ul>
       </div>
@@ -958,6 +1024,15 @@
     </div>
   </div>
 </section>
+
+<script>
+(function(){
+  var c=document.querySelector('.promo-card'),t=document.getElementById('pgTilt');
+  if(!c||!t||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;t.style.transform='rotateY('+(x*36)+'deg) rotateX('+(-y*26)+'deg)';});
+  c.addEventListener('pointerleave',function(){t.style.transform='';});
+})();
+</script>
 
 <script>
 (function(){
@@ -1042,22 +1117,22 @@
         <p>Not generic mentorship talk — pick the kind of session that matches exactly what you're stuck on.</p>
       </div>
       <div class="help-grid">
-        <div class="help-card reveal focusable-card">
+        <div class="help-card focusable-card">
           <div class="help-mark" style="background:linear-gradient(135deg,var(--violet),var(--pink));">01</div>
           <h3>Tech Stack Clarity Call</h3>
           <p>Confused between Python vs other languages, TensorFlow vs PyTorch, LangChain vs LangGraph? I help you choose based on where you actually want to go, not by trying everything at once.</p>
         </div>
-        <div class="help-card reveal focusable-card">
+        <div class="help-card focusable-card">
           <div class="help-mark" style="background:linear-gradient(135deg,var(--pink),var(--orange));">02</div>
           <h3>Concept Doubt-Clearing Session</h3>
           <p>Bring your specific confusion — classical ML, RAG, LangGraph, MCP, whatever's blocking you — and leave with a practical, non-academic explanation.</p>
         </div>
-        <div class="help-card reveal focusable-card">
+        <div class="help-card focusable-card">
           <div class="help-mark" style="background:linear-gradient(135deg,var(--cyan),var(--violet));">03</div>
           <h3>Roadmap & Career Guidance</h3>
           <p>Get a structured path built for your current level, and learn the mistakes to avoid — the ones that cost me months when I was starting out.</p>
         </div>
-        <div class="help-card reveal focusable-card">
+        <div class="help-card focusable-card">
           <div class="help-mark" style="background:linear-gradient(135deg,var(--card-2),var(--violet));">04</div>
           <h3>Project / Resume Review</h3>
           <p>1:1 review of what you're building or applying with — direct, specific feedback instead of generic advice.</p>
@@ -1819,21 +1894,66 @@
   No API keys are used or needed here.
 =========================================================== -->
 <style>
-  .rmchat-btn{
-    position:fixed;right:20px;bottom:20px;z-index:9000;width:58px;height:58px;border:0;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;
-    background:linear-gradient(135deg,var(--violet,#8B5CF6),var(--pink,#EC4899));
-    box-shadow:0 8px 28px rgba(139,92,246,.45);
-    transition:transform .2s ease,box-shadow .2s ease;
-  }
-  .rmchat-btn:hover{transform:translateY(-2px) scale(1.04);box-shadow:0 12px 34px rgba(139,92,246,.55);}
-  .rmchat-btn:focus-visible,.rmchat-close:focus-visible,.rmchat-chip:focus-visible,
-  .rmchat-send:focus-visible,.rmchat-action:focus-visible{outline:3px solid var(--cyan,#22D3EE);outline-offset:2px;}
-  .rmchat-btn svg{width:26px;height:26px;}
+  /* ---------- Ustaad JI 3D robot launcher ---------- */
+  .rmchat-btn{position:fixed;right:18px;bottom:14px;z-index:9000;width:84px;height:96px;border:0;padding:0;background:none;cursor:pointer;perspective:420px;-webkit-tap-highlight-color:transparent;}
+  .nx-bot{display:block;position:relative;width:100%;height:100%;animation:nxFloat 3.6s ease-in-out infinite;}
+  .nx-head{position:absolute;left:12px;top:24px;width:60px;height:52px;transform-style:preserve-3d;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,-8deg));transition:transform .18s ease-out;}
+  .nx-head::before,.nx-head::after,.nx-back,.nx-face{content:"";position:absolute;inset:0;border-radius:18px;}
+  .nx-head::before{background:#7c5ce0;transform:translateZ(-8px);}
+  .nx-head::after{background:#8b6cf0;transform:translateZ(-1px);}
+  .nx-back{background:#5b3fc0;transform:translateZ(-15px);}
+  .nx-face{background:linear-gradient(145deg,#fff,#ddd7f7 55%,#b9aef0);transform:translateZ(14px);box-shadow:inset 0 -6px 10px rgba(139,92,246,.35),0 0 22px rgba(139,92,246,.55);}
+  .nx-visor{position:absolute;left:7px;right:7px;top:11px;height:25px;border-radius:13px;background:#120d2e;display:flex;align-items:center;justify-content:center;gap:9px;overflow:hidden;}
+  .nx-eye{width:9px;height:13px;border-radius:5px;background:var(--cyan,#22D3EE);box-shadow:0 0 8px var(--cyan,#22D3EE);transform:translate(var(--ex,0),var(--ey,0));animation:nxBlink 5s infinite;}
+  .nx-mouth{position:absolute;left:50%;bottom:6px;width:14px;height:6px;margin-left:-7px;border-bottom:2.5px solid #7c5ce0;border-radius:0 0 12px 12px;}
+  .nx-ear{position:absolute;top:16px;width:9px;height:22px;border-radius:5px;background:linear-gradient(180deg,var(--pink,#EC4899),var(--violet,#8B5CF6));transform:translateZ(2px);}
+  .nx-ear.l{left:-7px;} .nx-ear.r{right:-7px;}
+  .nx-ant{position:absolute;left:50%;top:-17px;width:3px;height:18px;margin-left:-1.5px;background:var(--violet-soft,#A78BFA);transform:translateZ(0);}
+  .nx-ant i{position:absolute;left:50%;top:-7px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--orange,#FB923C);box-shadow:0 0 12px var(--orange,#FB923C);animation:nxPulse 1.8s infinite;}
+  .nx-shadow{position:absolute;left:50%;bottom:4px;width:48px;height:9px;margin-left:-24px;border-radius:50%;background:rgba(0,0,0,.45);filter:blur(4px);animation:nxShadow 3.6s ease-in-out infinite;}
+  .rmchat-btn:hover .nx-bot{animation-duration:1.4s;}
+  .rmchat-btn:hover .nx-eye{height:6px;border-radius:6px 6px 0 0;animation:none;}
+  .nx-bubble{position:fixed;right:108px;bottom:58px;z-index:9000;width:max-content;max-width:230px;padding:11px 30px 11px 14px;border-radius:16px 16px 4px 16px;font-size:.86rem;line-height:1.45;color:#fff;cursor:pointer;
+    background:linear-gradient(135deg,var(--violet,#8B5CF6),var(--pink,#EC4899));box-shadow:0 10px 28px rgba(139,92,246,.45);
+    opacity:0;transform:translateY(8px) scale(.94);transform-origin:bottom right;pointer-events:none;transition:opacity .3s,transform .3s;}
+  .nx-bubble.show{opacity:1;transform:none;pointer-events:auto;}
+  .nx-bubble::after{content:"";position:absolute;right:-7px;bottom:12px;border:7px solid transparent;border-left-color:var(--pink,#EC4899);border-right:0;}
+  .nx-bx{position:absolute;top:4px;right:6px;width:20px;height:20px;border:0;border-radius:50%;background:rgba(255,255,255,.2);color:#fff;font:inherit;font-size:.9rem;line-height:1;cursor:pointer;}
+  .nx-bx:hover{background:rgba(255,255,255,.35);}
+  .rmchat-btn{opacity:0;scale:.1;translate:160px 70px;rotate:-540deg;}
+  .rmchat-btn.nx-in{animation:nxPop 1.5s cubic-bezier(.25,.9,.35,1) forwards;}
+  .rmchat-btn.nx-in .nx-eye{animation:nxOn 1.5s ease-out 1;}
+  .rmchat-btn.nx-in .nx-ant i{animation:nxFlash .4s linear 4;}
+  .rmchat-btn.nx-ready{opacity:1;scale:1;translate:0 0;rotate:0deg;}
+  .rmchat-btn.nx-wave .nx-bot{animation:nxFloat 3.6s ease-in-out infinite,nxWave 1.2s ease-in-out 1;}
+  .nx-ring{position:absolute;left:50%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border:2px solid var(--cyan,#22D3EE);border-radius:50%;opacity:0;pointer-events:none;box-shadow:0 0 14px var(--cyan,#22D3EE);}
+  .rmchat-btn.nx-land .nx-ring{animation:nxRing 1.1s ease-out 1;}
+  .rmchat-btn.nx-land .nx-ring.r2{animation-delay:.3s;animation-fill-mode:backwards;border-color:var(--pink,#EC4899);box-shadow:0 0 14px var(--pink,#EC4899);}
+  @keyframes nxRing{0%{opacity:.9;transform:scale(.4);}100%{opacity:0;transform:scale(2.8);}}
+  @keyframes nxWave{0%,100%{rotate:0deg;}20%{rotate:-14deg;}45%{rotate:12deg;}70%{rotate:-8deg;}}
+  @keyframes nxFlash{0%,100%{opacity:1;}50%{opacity:.15;}}
+  @keyframes nxOn{0%,60%{transform:translate(var(--ex,0),var(--ey,0)) scaleY(.05);}75%{transform:translate(var(--ex,0),var(--ey,0)) scaleY(1.6);box-shadow:0 0 22px #fff;}100%{transform:translate(var(--ex,0),var(--ey,0)) scaleY(1);}}
+  .rmchat-btn.nx-ready.is-open{opacity:0;}
+  @keyframes nxPop{0%{opacity:0;scale:.1;translate:160px 70px;rotate:-540deg;}55%{opacity:1;scale:1.25;translate:-10px -24px;rotate:18deg;}75%{scale:.92;translate:0 6px;rotate:-8deg;}90%{scale:1.04;translate:0 -3px;rotate:3deg;}100%{opacity:1;scale:1;translate:0 0;rotate:0deg;}}
+  .nx-eye{transition:height .2s,width .2s,border-radius .2s;}
+  .rmchat-btn[data-mood="wow"] .nx-eye{width:11px;height:18px;}
+  .rmchat-btn[data-mood="squint"] .nx-eye{height:7px;animation:none;}
+  .rmchat-btn[data-mood="sleepy"] .nx-eye{height:3px;animation:none;}
+  .rmchat-btn[data-mood="sleepy"] .nx-bot{animation-duration:6s;}
+  .rmchat-btn[data-mood="wink"] .nx-eye:last-child{height:3px;animation:none;}
+  @keyframes nxFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
+  @keyframes nxShadow{0%,100%{transform:scale(1);opacity:.8;}50%{transform:scale(.72);opacity:.45;}}
+  @keyframes nxBlink{0%,92%,100%{transform:translate(var(--ex,0),var(--ey,0)) scaleY(1);}95%{transform:translate(var(--ex,0),var(--ey,0)) scaleY(.1);}}
+  @keyframes nxPulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+  .rmchat-btn.is-open{opacity:.0;pointer-events:none;}
+  .nx-av{position:relative;flex:none;width:40px;height:40px;border-radius:50%;background:linear-gradient(145deg,#fff,#b9aef0);display:flex;align-items:center;justify-content:center;box-shadow:0 0 14px rgba(139,92,246,.6);}
+  .nx-av .nx-visor{position:static;width:28px;height:16px;gap:5px;}
+  .nx-av .nx-eye{width:5px;height:8px;animation:nxBlink 5s infinite;}
+  .nx-av::after{content:"";position:absolute;right:0;bottom:1px;width:10px;height:10px;border-radius:50%;background:#34D399;border:2px solid var(--bg-soft,#141230);}
 
   .rmchat-panel{
-    position:fixed;right:20px;bottom:92px;z-index:9000;width:380px;max-width:calc(100vw - 24px);
-    height:min(560px,calc(100vh - 120px));height:min(560px,calc(100dvh - 120px));
+    position:fixed;right:20px;bottom:20px;z-index:9001;width:380px;max-width:calc(100vw - 24px);
+    height:min(580px,calc(100vh - 40px));height:min(580px,calc(100dvh - 40px));
     display:flex;flex-direction:column;overflow:hidden;
     background:var(--bg-soft,#141230);color:var(--text,#F5F3FF);font-family:inherit;
     border:1px solid var(--line,rgba(245,243,255,.12));border-radius:20px;
@@ -1880,11 +2000,15 @@
   .rmchat-note{margin:0;padding:0 14px 10px;font-size:.68rem;color:var(--text-dim2,rgba(245,243,255,.5));}
 
   @media (max-width:480px){
-    .rmchat-btn{right:14px;bottom:14px;}
-    .rmchat-panel{right:12px;left:12px;width:auto;bottom:84px;max-width:none;}
+    .rmchat-btn{right:8px;bottom:8px;transform:scale(.85);transform-origin:bottom right;}
+    .nx-bubble{right:84px;bottom:46px;max-width:170px;}
+    .rmchat-panel{right:10px;left:10px;width:auto;bottom:10px;max-width:none;}
   }
   @media (prefers-reduced-motion:reduce){
     .rmchat-btn,.rmchat-panel{transition:none;}
+    .nx-bot,.nx-shadow,.nx-eye,.nx-ant i{animation:none;}
+    .rmchat-btn{opacity:1;scale:1;translate:0 0;animation:none;}
+    .rmchat-btn.is-open{opacity:0;}
     .rmchat-dot{animation:none;opacity:.8;}
     .rmchat-msgs{scroll-behavior:auto;}
   }
@@ -1899,7 +2023,7 @@
   var EMAIL = "nextaiengineers@gmail.com";
 
   var SUGGESTIONS = ["How much does a session cost?", "What can Rohan help me with?", "How do I book a session?"];
-  var WELCOME = "Hi! I can answer questions about Rohan, his sessions, pricing and how to book. What would you like to know?";
+  var WELCOME = "Hi, I'm Ustaad JI, your AI engineering guide! I can answer questions about Rohan, his sessions, pricing and how to book. What would you like to know?";
   var MAX_HISTORY = 6;
 
   var history = [];
@@ -1919,20 +2043,34 @@
   btn.setAttribute("aria-label", "Open chat");
   btn.setAttribute("aria-expanded", "false");
   btn.setAttribute("aria-controls", "rmchat-panel");
-  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.6-.8L3 21l1.9-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg>';
+  btn.innerHTML = '<span class="nx-bot" aria-hidden="true"><span class="nx-head"><span class="nx-back"></span><span class="nx-ant"><i></i></span><span class="nx-ear l"></span><span class="nx-ear r"></span><span class="nx-face"><span class="nx-visor"><span class="nx-eye"></span><span class="nx-eye"></span></span><span class="nx-mouth"></span></span></span><span class="nx-shadow"></span></span><span class="nx-ring"></span><span class="nx-ring r2"></span>';
+  btn.setAttribute("aria-label", "Open chat with Ustaad JI, your AI assistant");
+  var bubble = el("div", "nx-bubble");
+  var bubbleText = el("span", "nx-bt");
+  var bubbleX = el("button", "nx-bx", "\u00D7");
+  bubbleX.type = "button";
+  bubbleX.setAttribute("aria-label", "Silence Ustaad JI");
+  bubble.appendChild(bubbleText);
+  bubble.appendChild(bubbleX);
+  document.body.appendChild(bubble);
 
   var panel = el("div", "rmchat-panel");
   panel.id = "rmchat-panel";
   panel.setAttribute("role", "dialog");
-  panel.setAttribute("aria-label", "Chat with the mentorship assistant");
+  panel.setAttribute("aria-label", "Chat with Ustaad JI, the AI assistant");
 
   var head = el("div", "rmchat-head");
+  var av = el("span", "nx-av");
+  av.innerHTML = '<span class="nx-visor"><span class="nx-eye"></span><span class="nx-eye"></span></span>';
+  av.setAttribute("aria-hidden", "true");
   var headText = el("div");
-  headText.appendChild(el("p", "rmchat-title", "Ask about Rohan"));
-  headText.appendChild(el("p", "rmchat-sub", "Answers come only from this site's information"));
+  headText.style.flex = "1";
+  headText.appendChild(el("p", "rmchat-title", "Ustaad JI \u2022 AI Engineer Guide"));
+  headText.appendChild(el("p", "rmchat-sub", "Online \u2022 Answers come only from this site's information"));
   var closeBtn = el("button", "rmchat-close", "\u00D7");
   closeBtn.type = "button";
   closeBtn.setAttribute("aria-label", "Close chat");
+  head.appendChild(av);
   head.appendChild(headText);
   head.appendChild(closeBtn);
 
@@ -2080,17 +2218,148 @@
   // ----- open / close -----
   function openPanel() {
     panel.classList.add("open");
+    btn.classList.add("is-open");bubble.classList.remove("show");
     btn.setAttribute("aria-expanded", "true");
-    btn.setAttribute("aria-label", "Close chat");
     startConversation();
     setTimeout(function () { input.focus(); }, 60);
   }
   function closePanel() {
     panel.classList.remove("open");
+    btn.classList.remove("is-open");
     btn.setAttribute("aria-expanded", "false");
-    btn.setAttribute("aria-label", "Open chat");
     btn.focus();
   }
+
+
+  // ----- Ustaad JI: pops in, talks sarcasm on repeat, and watches you work -----
+  var calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var headEl = btn.querySelector(".nx-head"), eyeBox = btn.querySelector(".nx-visor");
+  var muted = false, sleepy = false, lastAct = Date.now(), lockUntil = 0, typeTimer = null, hideTimer = null, li = 0;
+
+  var LINES = [    ["Rohan is 2\u00D7 AWS certified. He'll mention it. Subtly. Like this. \uD83D\uDE0F", "wink"],
+    ["Rohan quit the DSA grind for ML. I'm the result. You're welcome. \uD83D\uDE44", "wow"],
+    ["\u20B999 for 20 minutes with Rohan. Cheaper than your 'quick' coffee. \uD83D\uDC40", "squint"],
+    ["Rohan reviews your resume for free. Free. Your excuses just ran out.", "wow"],
+    ["Rohan survived Java and DSA so you don't have to. Honour the sacrifice.", "wink"],
+    ["Rohan builds LangGraph agents all day. I'm the only one that talks back. \uD83D\uDE0F", "wink"],
+    ["Rohan's from Asansol and shipping AI. What's your excuse today?", "squint"],
+    ["Rohan's friend said 'try ML' and he actually listened. Be like Rohan.", "wow"],
+    ["Rohan built me, so if I'm annoying it's technically his fault. \uD83D\uDE07", "wink"],
+    ["Rohan answers your real question, not a 40-hour course. Revolutionary.", "squint"],
+    ["Rohan will pick your stack for you. No more 14 conflicting YouTube opinions.", "wow"],
+    ["Rohan's DSA roadmap is free. Downloading it is the hard part, apparently.", "squint"],
+    ["Rohan built me to help you. Yes, with sarcasm. He calls it a feature. \uD83D\uDE0F", "wink"],
+    ["Oh wow, a visitor. Let me pretend I'm not excited. \uD83D\uDE44", "wink"],
+    ["Still reading? Your attention span is beating mine. Impressive.", "wow"],
+    ["Learning AI by watching tutorials at 2x speed? Bold strategy.", "squint"],
+    ["Fun fact: \"I'll start tomorrow\" is not a tech stack. \uD83D\uDE0F", "wink"],
+    ["Don't mind me. Just watching you scroll. Totally normal. \uD83D\uDC40", "squint"],
+    ["Click me. I dare you. I have absolutely nothing else to do.", "wow"],
+    ["Tutorial hell won't escape itself, you know. Ask me instead.", "squint"],
+    ["I'm an AI, you're an aspirant. Together we're basically employed.", "wink"]
+  ];
+
+  function mood(m) { btn.dataset.mood = m || ""; }
+
+  function look(dx, dy) {
+    dx = Math.max(-1, Math.min(1, dx)); dy = Math.max(-1, Math.min(1, dy));
+    headEl.style.setProperty("--ry", (dx * 26) + "deg");
+    headEl.style.setProperty("--rx", (-dy * 18) + "deg");
+    eyeBox.style.setProperty("--ex", (dx * 3) + "px");
+    eyeBox.style.setProperty("--ey", (dy * 2.5) + "px");
+  }
+
+  function say(text, m, ms, force) {
+    var now = Date.now();
+    if (muted || panel.classList.contains("open")) return;
+    if (!force && now < lockUntil) return;
+    ms = ms || (3500 + text.length * 45);
+    lockUntil = now + ms + 800;
+    clearInterval(typeTimer); clearTimeout(hideTimer);
+    bubbleText.textContent = "";
+    bubble.classList.add("show");
+    mood(m);
+    if (calm) { bubbleText.textContent = text; }
+    else {
+      var i = 0;
+      typeTimer = setInterval(function () {
+        bubbleText.textContent = text.slice(0, ++i);
+        if (i >= text.length) clearInterval(typeTimer);
+      }, 24);
+    }
+    hideTimer = setTimeout(function () { bubble.classList.remove("show"); mood(""); }, ms);
+  }
+
+  function act() {
+    lastAct = Date.now();
+    if (sleepy) { sleepy = false; mood("wow"); setTimeout(function () { mood(""); }, 900); }
+  }
+
+  // eyes follow the cursor / finger
+  function onMove(e) {
+    act();
+    var r = btn.getBoundingClientRect();
+    look((e.clientX - (r.left + r.width / 2)) / 450, (e.clientY - (r.top + r.height / 2)) / 450);
+  }
+  if (!calm) {
+    document.addEventListener("pointermove", onMove, { passive: true });
+    document.addEventListener("pointerdown", onMove, { passive: true });
+  }
+
+  // eyes jump to whatever field the user is typing in
+  document.addEventListener("focusin", function (e) {
+    var t = e.target;
+    if (!t.matches || !t.matches("input,textarea,select") || t.closest(".rmchat-panel")) return;
+    act();
+    var r = t.getBoundingClientRect(), b = btn.getBoundingClientRect();
+    look((r.left + r.width / 2 - (b.left + b.width / 2)) / 450, (r.top + r.height / 2 - (b.top + b.height / 2)) / 450);
+    say("Typing something? Go on, I'm not watching. (I'm totally watching.) \uD83D\uDC40", "squint", 4500);
+  });
+
+  // eyes look down/up as the page scrolls + comments at milestones
+  var lastY = window.scrollY, marks = [
+    { p: 0.4, t: "Halfway down already? Speed-reading or panicking?", m: "wow", done: false },
+    { p: 0.88, t: "Almost at the bottom. Ready to actually do something? Ask me or book a session.", m: "wink", done: false }
+  ];
+  window.addEventListener("scroll", function () {
+    act();
+    var y = window.scrollY, d = y - lastY; lastY = y;
+    if (Math.abs(d) > 2) look(0.1, d > 0 ? 1 : -1);
+    var h = document.documentElement.scrollHeight - window.innerHeight, p = h > 0 ? y / h : 0;
+    marks.forEach(function (k) { if (!k.done && p >= k.p) { k.done = true; say(k.t, k.m, 5000, true); } });
+  }, { passive: true });
+
+  // idle: falls asleep, then wanders around looking bored
+  setInterval(function () {
+    if (panel.classList.contains("open")) return;
+    var idle = Date.now() - lastAct;
+    if (idle > 12000 && !sleepy) { sleepy = true; say("Hello? Did you fall asleep? I'm literally floating here. \uD83D\uDE34", "sleepy", 5000, true); }
+    if (idle > 20000) look(Math.random() * 1.6 - 0.8, Math.random() * 1.2 - 0.6);
+  }, 2500);
+
+  document.addEventListener("visibilitychange", function () {
+    if (!document.hidden) { act(); say("Oh, you're back. I wasn't waiting or anything. \uD83D\uDE44", "wink", 4500, true); }
+  });
+
+  // sarcasm on repeat
+  setInterval(function () {
+    if (sleepy || Date.now() < lockUntil) return;
+    var l = LINES[li++ % LINES.length]; say(l[0], l[1]);
+  }, 12000);
+
+  // entrance
+  btn.addEventListener("animationend", function (e) {
+    if (e.animationName === "nxPop") {
+      btn.classList.add("nx-ready", "nx-land", "nx-wave"); btn.classList.remove("nx-in");
+      setTimeout(function () { btn.classList.remove("nx-land", "nx-wave"); }, 1800);
+    }
+  });
+  if (calm) btn.classList.add("nx-ready");
+  else setTimeout(function () { btn.classList.add("nx-in"); }, 400);
+  setTimeout(function () { say("Oh look, a human. I'm Ustaad JI. Don't worry, I only judge a little. \uD83D\uDE0F", "wow", 5500, true); }, 2400);
+
+  bubbleX.addEventListener("click", function (e) { e.stopPropagation(); muted = true; bubble.classList.remove("show"); mood(""); });
+  bubble.addEventListener("click", function () { openPanel(); });
 
   btn.addEventListener("click", function () { panel.classList.contains("open") ? closePanel() : openPanel(); });
   closeBtn.addEventListener("click", closePanel);
@@ -2338,21 +2607,40 @@
     io(host,v=>host.classList.toggle('rm-paused',!v));
   })();}catch(e){console.warn('roadmap',e);}
 
-  // ---------- STEP 6: RAG-style session cards ----------
-  try{if(hasGsap&&!reduce){(function(){
+   // ---------- STEP 6: smooth 3D session cards (transform + opacity only) ----------
+  try{(function(){
     const cards=[...document.querySelectorAll('.help-card')];if(!cards.length)return;
-    const r=(a,b)=>a+Math.random()*(b-a);
-    cards.forEach((c,i)=>{
-      const badge=document.createElement('span');badge.className='rag-badge';badge.textContent='retrieved ✓';badge.setAttribute('aria-hidden','true');c.appendChild(badge);
-      gsap.set(c,{x:r(-200,200),y:r(-120,160),rotation:r(-12,12),opacity:.12,scale:.86,filter:'blur(3px)'});
-      ScrollTrigger.create({trigger:c,start:'top 88%',once:true,onEnter:()=>{
-        gsap.to(c,{x:0,y:0,rotation:0,opacity:1,scale:1,filter:'blur(0px)',duration:.95,delay:(i%2)*.25,ease:'power3.out',onComplete:()=>{
-          gsap.set(c,{clearProps:'transform,opacity,filter'});c.classList.add('in-view','retrieved');
-          gsap.fromTo(badge,{opacity:0,y:6},{opacity:1,y:0,duration:.25,yoyo:true,repeat:1,repeatDelay:1,onComplete:()=>gsap.set(badge,{opacity:0})});
-          setTimeout(()=>c.classList.remove('retrieved'),1300);}});
-      }});
-    });
-  })();}}catch(e){console.warn('rag cards',e);}
+    const fine=matchMedia('(hover: hover) and (pointer: fine)').matches;
+    cards.forEach((c,i)=>c.style.setProperty('--i',i));
+    if(fine&&!reduce&&!/[?&]lite\b/.test(location.search)&&'IntersectionObserver' in window){
+      const fl=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('fl',e.isIntersecting)),{threshold:0});
+      cards.forEach(c=>fl.observe(c));
+    }
+    const land=(c,d)=>{
+      c.style.setProperty('--d',d+'ms');c.classList.add('h3d-anim');
+      requestAnimationFrame(()=>requestAnimationFrame(()=>c.classList.remove('h3d-pre')));
+      setTimeout(()=>{c.classList.remove('h3d-anim');c.style.removeProperty('--d');c.classList.add('h3d-done');},d+750);
+    };
+    if(!reduce&&'IntersectionObserver' in window){
+      cards.forEach(c=>c.classList.add('h3d-pre'));
+      const io2=new IntersectionObserver(es=>{
+        let k=0;
+        es.forEach(e=>{if(e.isIntersecting){io2.unobserve(e.target);land(e.target,k++*70);}});
+      },{threshold:0,rootMargin:'0px 0px 25% 0px'});
+      cards.forEach(c=>io2.observe(c));
+    }
+    if(fine&&!reduce){
+      cards.forEach(c=>{
+        c.addEventListener('pointermove',e=>{
+          if(!c.classList.contains('h3d-done'))return;
+          const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+          c.style.transform='perspective(800px) rotateY('+(x*9).toFixed(1)+'deg) rotateX('+(-y*9).toFixed(1)+'deg) translateY(-4px) scale(1.012)';
+        });
+        c.addEventListener('pointerleave',()=>{c.style.transform='';});
+        c.addEventListener('click',()=>{c.style.transform='';},true);
+      });
+    }
+  })();}catch(e){console.warn('help cards',e);}
 })();
 </script>
 <script>
