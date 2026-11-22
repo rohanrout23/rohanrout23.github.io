@@ -605,6 +605,7 @@ dialog.auth::backdrop{background:rgba(0,0,0,.72)}
 .sp-quote{margin-left:0;margin-right:0}
 .html-fx .sp-quote.sp-hold{opacity:0;translate:0 14px}
 .sp-quote{transition:opacity .7s ease,translate .8s cubic-bezier(.2,.7,.2,1)}
+.sp-replay{margin-top:12px}
 .sp-after{margin:28px 0 0;color:var(--text-2);font-size:17px;line-height:27px;max-width:60ch}
 .foot nav{align-items:center}
 @media(max-width:1100px){.links{gap:18px}}
@@ -3350,11 +3351,11 @@ window.NEXTAI_SITE = {
     var edges=[];nodes.forEach(function(a,i){nodes.forEach(function(b,j){if(b.l===a.l+1)edges.push([i,j]);});});
     function sm(t){return t*t*(3-2*t);}function cl(v){return Math.max(0,Math.min(1,v));}
     function resize(){var dpr=Math.min(devicePixelRatio||1,2);W=cv.clientWidth;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);}
-    var cur=0,target=0,lit=0,litAt=0,now=0,fired=false,vis=false,run=false;
+    var cur=0,target=0,lit=0,litAt=0,now=0,fired=false,vis=false,run=false,playing=false,played=false,t0=null,mx=0,my=0,DUR=3800;
     function pos(n,q,t){
       var x0=n.sx*W+Math.sin(t*.0011+n.ph)*6*(1-q),y0=n.sy*H+Math.cos(t*.0013+n.ph)*6*(1-q);
       var x1=n.tx*W,y1=n.ty*H,bend=Math.sin(q*Math.PI)*34*n.sw;
-      return [x0+(x1-x0)*q,y0+(y1-y0)*q+bend];
+      return [x0+(x1-x0)*q+mx*q*9*(n.l+1),y0+(y1-y0)*q+bend+my*q*6*(n.l+1)];
     }
     function draw(){
       ctx.clearRect(0,0,W,H);
@@ -3373,19 +3374,25 @@ window.NEXTAI_SITE = {
     resize();addEventListener("resize",function(){resize();draw();});
     if(!fxOn){cur=1;lit=1;litAt=0;draw();return;}
     fig.classList.add("sp-hold");
-    function progress(){
-      var sec=document.getElementById("story"),r=sec.getBoundingClientRect(),vh=innerHeight;
-      var t0=vh*.8,t1=vh*.45-r.height;target=cl((t0-r.top)/(t0-t1));
-    }
+    /* plays by itself once the canvas is on screen, then keeps pulsing; it no longer depends on how far you scroll */
     function tick(t){
-      if(!run)return;now=t;progress();cur+=(target-cur)*.12;
-      if(cur>=.985&&!fired){fired=true;litAt=t;fig.classList.remove("sp-hold");}
-      else if(cur<.9&&fired){fired=false;fig.classList.add("sp-hold");}
+      if(!run)return;now=t;
+      if(playing){if(t0===null)t0=t;var k=cl((t-t0)/DUR);target=k;cur=sm(k);}
+      if(cur>=.985&&!fired){fired=true;litAt=t;fig.classList.remove("sp-hold");if(replay)replay.hidden=false;}
       lit+=((fired?1:0)-lit)*.08;draw();requestAnimationFrame(tick);
     }
     function start(){if(vis&&!document.hidden&&!run){run=true;requestAnimationFrame(tick);}}
+    var replay=h("button","btn g sm sp-replay","Replay animation");replay.type="button";replay.hidden=true;
+    replay.addEventListener("click",function(){cur=0;target=0;lit=0;fired=false;t0=null;playing=true;fig.classList.add("sp-hold");replay.hidden=true;start();});
+    card.after(replay);
+    cv.addEventListener("pointermove",function(e){var r=cv.getBoundingClientRect();mx=((e.clientX-r.left)/r.width-.5)*2;my=((e.clientY-r.top)/r.height-.5)*2;});
+    cv.addEventListener("pointerleave",function(){mx=0;my=0;});
     draw();
-    new IntersectionObserver(function(es){vis=es[0].isIntersecting;if(vis)start();else run=false;}).observe(cv);
+    new IntersectionObserver(function(es){
+      var e=es[0];vis=e.isIntersecting;
+      if(vis&&!played&&e.intersectionRatio>=.4){played=true;playing=true;t0=null;}
+      if(vis)start();else run=false;
+    },{threshold:[0,.4,.8]}).observe(cv);
     document.addEventListener("visibilitychange",function(){if(document.hidden)run=false;else start();});
   })();
 
