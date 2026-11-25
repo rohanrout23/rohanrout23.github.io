@@ -10,12 +10,24 @@
 <meta property="og:title" content="NextAI Engineers: Become an AI Engineer">
 <meta property="og:description" content="Learn AI engineering from Python fundamentals to production-ready AI agents, with 1:1 mentorship from Rohan Rout. Get a clear roadmap, build real projects and ship them.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://nextaiengineers.com/">
+<meta property="og:image" content="https://nextaiengineers.com/assets/images/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="NextAI Engineers: 1:1 AI engineering mentorship by Rohan Rout">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NextAI Engineers: Become an AI Engineer">
+<meta name="twitter:description" content="1:1 AI engineering mentorship for beginners, a clear roadmap and a free resume review.">
+<meta name="twitter:image" content="https://nextaiengineers.com/assets/images/og-image.png">
+<meta name="theme-color" content="#08090a">
+<link rel="canonical" href="https://nextaiengineers.com/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"NextAI Engineers","url":"https://nextaiengineers.com/","description":"1:1 AI engineering mentorship for beginners, with a clear roadmap, free notes and a free resume review.","founder":{"@type":"Person","name":"Rohan Rout","jobTitle":"Generative AI Engineer","sameAs":["https://linkedin.com/in/rohannrout","https://github.com/rohanrout23","https://www.instagram.com/rohannrout"]}}</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231CC294'/%3E%3Cpath d='M9 23V9l14 14V9' fill='none' stroke='%2308090a' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cg fill='%2308090a'%3E%3Ccircle cx='9' cy='9' r='2.6'/%3E%3Ccircle cx='9' cy='23' r='2.6'/%3E%3Ccircle cx='23' cy='9' r='2.6'/%3E%3Ccircle cx='23' cy='23' r='2.6'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;450;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
 :root{
   --bg-0:#08090a; --bg-1:#0f1011; --bg-2:#ffffff12; --line:#ffffff14; --line-strong:#e5e5e6;
@@ -605,6 +617,7 @@ dialog.auth::backdrop{background:rgba(0,0,0,.72)}
 .sp-quote{margin-left:0;margin-right:0}
 .html-fx .sp-quote.sp-hold{opacity:0;translate:0 14px}
 .sp-quote{transition:opacity .7s ease,translate .8s cubic-bezier(.2,.7,.2,1)}
+.sp-replay{margin-top:12px}
 .sp-after{margin:28px 0 0;color:var(--text-2);font-size:17px;line-height:27px;max-width:60ch}
 .foot nav{align-items:center}
 @media(max-width:1100px){.links{gap:18px}}
@@ -706,6 +719,34 @@ dialog.book.pj-form{width:min(560px,calc(100% - 32px))}
 .rmchat-snd[aria-pressed="false"]{color:#8a8f98}
 .rmchat-snd svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .rmchat-snd:focus-visible{outline:2px solid #1CC294;outline-offset:2px}
+
+/* ===== Week 1 additions: single mentor layout, quiz ===== */
+.grid2.solo{grid-template-columns:minmax(0,820px)}
+.qz{max-width:760px;padding:24px}
+.qz-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+.qz-bar{height:4px;border-radius:2px;background:var(--bg-2);overflow:hidden;margin-bottom:22px}
+.qz-bar i{display:block;height:100%;background:var(--accent);border-radius:2px;transition:width .3s ease}
+.qz fieldset{border:0;margin:0;padding:0;min-width:0}
+.qz legend{padding:0;margin:0 0 16px;font:500 20px/28px var(--sans);color:var(--text-1)}
+.qz legend:focus{outline:none}
+.qz-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:620px){.qz-opts{grid-template-columns:1fr}}
+.qz-opt{position:relative;display:flex;align-items:center;gap:12px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--bg-0);cursor:pointer;color:var(--text-1);font:400 15px/22px var(--sans);transition:border-color .15s ease,background .15s ease}
+.qz-opt:hover{border-color:#ffffff40}
+.qz-opt.is-on{border-color:var(--accent);background:rgba(28,194,148,.08)}
+.qz-opt input{appearance:none;-webkit-appearance:none;flex:none;width:18px;height:18px;margin:0;border-radius:50%;border:1.5px solid #ffffff59;background:transparent;display:grid;place-items:center;cursor:pointer}
+.qz-opt input::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);transform:scale(0);transition:transform .15s ease}
+.qz-opt input:checked{border-color:var(--accent)}
+.qz-opt input:checked::after{transform:scale(1)}
+.qz-opt:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+.qz-nav{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.qz-res h3{font-size:24px;line-height:32px;margin-top:12px;color:#f5c84c}
+.qz-res p{margin:10px 0 0;color:var(--text-2);font-size:15px;line-height:24px;max-width:62ch}
+.qz-recap{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.qz-box{margin-top:18px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--bg-0)}
+.qz-box b{display:block;font-weight:500;color:var(--text-1)}
+.qz-box p{margin:4px 0 0}
+.qz-box .mono{display:block;margin-top:6px}
 </style>
 </head>
 <body>
@@ -714,19 +755,19 @@ dialog.book.pj-form{width:min(560px,calc(100% - 32px))}
     <div class="nav">
       <a class="brand" href="#top" aria-label="NextAI Engineers home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" focusable="false"><path d="M9 23V9l14 14V9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><g fill="currentColor"><circle cx="9" cy="9" r="2.6"/><circle cx="9" cy="23" r="2.6"/><circle cx="23" cy="9" r="2.6"/><circle cx="23" cy="23" r="2.6"/></g></svg></span><span class="brand-word">Next<span class="brand-ai">AI</span> Engineers</span></a>
       <nav class="links" aria-label="Main">
-        <a href="#top">Home</a><a href="#roadmap">Roadmap</a><a href="#notes">Notes</a><a href="#projects">Projects</a><a href="#mentorship">Mentorship</a><a href="#about">About</a><a href="#contact">Contact</a>
+        <a href="#top">Home</a><a href="#roadmap">Roadmap</a><a href="#notes">Notes</a><a href="#projects">Projects</a><a href="#about">About</a><a href="#mentorship">Mentorship</a><a href="#contact">Contact</a>
       </nav>
       <div class="right">
         <div class="auth-slot" data-auth-slot="desktop"></div>
-        <a class="btn p sm" href="#roadmap">Start Learning</a>
+        <a class="btn p sm" href="#mentorship" data-book>Book a session</a>
         <div class="auth-slot" data-auth-slot="bar"></div>
         <button class="menu" id="menuBtn" aria-expanded="false" aria-controls="panel">Menu</button>
       </div>
     </div>
     <nav class="panel" id="panel" aria-label="Mobile">
-      <a href="#top">Home</a><a href="#roadmap">Roadmap</a><a href="#notes">Notes</a><a href="#projects">Projects</a><a href="#mentorship">Mentorship</a><a href="#about">About</a><a href="#contact">Contact</a>
+      <a href="#top">Home</a><a href="#roadmap">Roadmap</a><a href="#notes">Notes</a><a href="#projects">Projects</a><a href="#about">About</a><a href="#mentorship">Mentorship</a><a href="#contact">Contact</a>
       <div class="auth-slot" data-auth-slot="mobile"></div>
-      <a class="btn p" style="margin-top:10px" href="#roadmap">Start Learning</a>
+      <a class="btn p" style="margin-top:10px" href="#mentorship" data-book>Book a session</a>
     </nav>
   </div>
 </header>
@@ -735,17 +776,17 @@ dialog.book.pj-form{width:min(560px,calc(100% - 32px))}
   <div class="wrap hero" id="hero">
     <div class="copy" id="copy">
       <button class="free-pill" type="button" data-free><span class="fp-tag">FREE</span>Your first resume review is free<span class="fp-go">Claim yours</span></button>
-      <h1 aria-label="Become an AI Engineer. Build. Deploy. Innovate.">
+      <h1 aria-label="Become an AI Engineer. With a mentor.">
         <span class="mask" aria-hidden="true"><span style="--d:.15s">Become an</span></span>
         <span class="mask" aria-hidden="true"><span style="--d:.27s">AI Engineer.</span></span>
-        <span class="mask hl" aria-hidden="true"><span style="--d:.4s">Build. Deploy. Innovate.</span></span>
+        <span class="mask hl" aria-hidden="true"><span style="--d:.4s">With a mentor.</span></span>
       </h1>
-      <p class="sub">From Python fundamentals to production-ready AI agents. Learn the skills, build real projects, and become industry-ready.</p>
+      <p class="sub">1:1 guidance for beginners from Rohan Rout, a working Generative AI engineer. Get a clear roadmap, build real projects, and finally get answers to the questions courses never cover.</p>
       <div class="cta">
-        <button class="btn p lg" type="button" data-free>Get my free resume review</button>
-        <a class="btn s lg" href="#roadmap">Explore AI Roadmap</a>
+        <button class="btn p lg" type="button" data-book>Book a ₹99 call</button>
+        <button class="btn s lg" type="button" data-free>Get my free resume review</button>
       </div>
-      <span class="chip"><i></i>Learn AI Engineering. Build Real-World Systems.</span>
+      <span class="chip"><i></i>20 minute 1:1 video call. Your first resume review is free.</span>
     </div>
     <div class="stage" id="stage">
       <div id="scene" role="img" aria-label="Interactive 3D neural network with LLMs, RAG, AI Agents, MCP, Python and Machine Learning orbiting it"></div>
@@ -753,7 +794,9 @@ dialog.book.pj-form{width:min(560px,calc(100% - 32px))}
     </div>
   </div>
 
-    <section class="sec" id="resume"><div class="wrap" id="resume-root"></div></section>
+  <section class="sec" id="quiz"><div class="wrap" id="quiz-root"></div></section>
+
+  <section class="sec" id="resume"><div class="wrap" id="resume-root"></div></section>
 
   <section class="sec" id="roadmap"><div class="wrap" id="roadmap-root"></div></section>
 
@@ -769,11 +812,11 @@ dialog.book.pj-form{width:min(560px,calc(100% - 32px))}
 
   <section class="sec" id="projects"><div class="wrap" id="projects-root"></div></section>
 
-  <section class="sec" id="mentorship"><div class="wrap" id="mentorship-root"></div></section>
-
   <section class="sec" id="about"><div class="wrap" id="about-root"></div></section>
 
   <section class="sec" id="story"><div class="wrap" id="story-root"></div></section>
+
+  <section class="sec" id="mentorship"><div class="wrap" id="mentorship-root"></div></section>
 
   <section class="sec" id="contact"><div class="wrap">
     <div class="sh"><span class="badge">Contact</span><h2>Stuck on something? Tell me.</h2><p>A concept, a roadmap question or a project you cannot get past. Fill this in and Rohan will get back to you.</p></div>
@@ -803,6 +846,8 @@ dialog.book.pj-form{width:min(560px,calc(100% - 32px))}
 <footer><div class="wrap foot"><div class="foot-l"><a class="brand" href="#top" aria-label="NextAI Engineers, back to top"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" focusable="false"><path d="M9 23V9l14 14V9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><g fill="currentColor"><circle cx="9" cy="9" r="2.6"/><circle cx="9" cy="23" r="2.6"/><circle cx="23" cy="9" r="2.6"/><circle cx="23" cy="23" r="2.6"/></g></svg></span><span class="brand-word">Next<span class="brand-ai">AI</span> Engineers</span></a><span>© 2026 NextAI Engineers. Asansol, West Bengal.</span></div><nav aria-label="Footer"><a href="#terms">Terms</a><a href="#privacy">Privacy</a><a href="https://linkedin.com/in/rohannrout" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/rohanrout23" target="_blank" rel="noopener">GitHub</a><a href="https://www.instagram.com/rohannrout" target="_blank" rel="noopener">Instagram</a><a href="mailto:nextaiengineers@gmail.com?subject=NextAI%20Engineers%20-%20mentorship%20question">Email</a></nav></div></footer>
 
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 /* Mentor photos (resized copies of your uploads, embedded so they show anywhere). */
 window.NEXTAI_PHOTOS={
@@ -943,7 +988,7 @@ window.NEXTAI_PHOTOS={
 /* mentorship data + components */
 /* =====================================================================
    MENTORSHIP CONTENT. Edit this file only; components never need touching.
-   Anything marked PLACEHOLDER is not real. Replace it before launch.
+   Keep every entry real: remove anything you cannot stand behind.
    ===================================================================== */
 window.NEXTAI_MENTORSHIP = {
 
@@ -965,8 +1010,8 @@ window.NEXTAI_MENTORSHIP = {
 
   header: {
     badge: "Mentorship",
-    title: "Learn directly from working AI engineers",
-    sub: "One on one sessions with people who build and ship this work every day."
+    title: "Learn directly from a working AI engineer",
+    sub: "One on one sessions with someone who builds and ships this work every day."
   },
 
   mentors: [
@@ -983,22 +1028,9 @@ window.NEXTAI_MENTORSHIP = {
       ],
       tags: ["LLMs", "RAG", "Agents", "LangGraph", "MCP", "AWS SageMaker"],
       bio: "Builds agentic systems, RAG pipelines and LLM orchestration. Holds two AWS certifications. Started where most learners are now, confused about what actually mattered, and mentors to save others the detour.",
-      languages: ["To confirm"],                   /* PLACEHOLDER */
+      languages: [],                               /* add e.g. ["English", "Hindi", "Bengali"] to show a Languages line */
       profileUrl: "https://linkedin.com/in/rohannrout",
       placeholder: false
-    },
-    {
-      id: "mentor2",
-      name: "Second mentor (placeholder)",         /* PLACEHOLDER: replace or delete this entry */
-      role: "Role and company",
-      experience: "Years of experience",
-      initials: "M2",
-      photo: "",
-      tags: ["MLOps", "Deployment"],
-      bio: "Placeholder profile. Add a real mentor here, or remove this entry to show only one mentor.",
-      languages: ["To confirm"],
-      profileUrl: "",
-      placeholder: true
     }
   ],
 
@@ -1014,18 +1046,9 @@ window.NEXTAI_MENTORSHIP = {
       placeholder: false
     },
     {
-      id: "roadmap",
-      title: "Roadmap review",
-      duration: "30 min (placeholder)",
-      format: "Video call",
-      gets: ["Your current plan reviewed", "Gaps and a better order", "A week by week outline"],
-      price: "Price to be announced",
-      placeholder: true
-    },
-    {
       id: "resume",
       title: "Resume review",
-      duration: "Async (placeholder)",
+      duration: "Written feedback",
       format: "PDF feedback",
       gets: ["Specific, direct feedback", "What to cut and what to add", "Notes for AI engineering roles"],
       price: "First review free",
@@ -1034,36 +1057,28 @@ window.NEXTAI_MENTORSHIP = {
       link: "#resume",
       linkLabel: "Upload for free",
       placeholder: false
-    },
-    {
-      id: "project",
-      title: "Project mentoring",
-      duration: "45 min (placeholder)",
-      format: "Video call",
-      gets: ["Architecture and tooling advice", "Debugging help on your build", "A plan to ship it"],
-      price: "Price to be announced",
-      placeholder: true
     }
   ],
 
   stepsTitle: "How it works",
   steps: [
-    { title: "Choose a mentor", text: "Pick the person whose experience fits your goal." },
+    { title: "Pick a session", text: "Choose the call or review that fits where you are today." },
     { title: "Pick a time", text: "Send a booking request with the slot that suits you." },
     { title: "Have the session", text: "A focused one on one call on your exact question." },
     { title: "Get a plan", text: "Leave with clear next steps you can start today." }
   ],
 
-  /* Hidden automatically when this array is empty. Entries marked placeholder show a "Sample" badge. */
+  /* Hidden automatically when this array is empty. */
   testimonialsTitle: "What learners say",
   testimonials: [
-    { quote: "Sample testimonial. Replace this with a real learner’s words and permission.", name: "Sample learner", role: "Placeholder", placeholder: true },
-    { quote: "Sample testimonial. Delete both entries to hide this whole block.", name: "Sample learner", role: "Placeholder", placeholder: true }
+    /* Add real ones here, for example:
+       { quote: "Words from a learner, with their permission.", name: "Full name", role: "What they do now" }
+       The whole block stays hidden while this list is empty. */
   ],
 
   faqTitle: "Questions",
   faqs: [
-    { q: "How long is a session?", a: "The career guidance call is 20 minutes. Each other program shows its duration on its card." },
+    { q: "How long is a session?", a: "The career guidance call is 20 minutes on video. The resume review is written feedback, so there is no call." },
     { q: "How do I book and pay?", a: "Send a booking request here. The mentor confirms the time and payment details with you over WhatsApp." },
     { q: "I am a complete beginner. Is that okay?", a: "Yes. Sessions suit every level, from a first Python script to production agents." },
     { q: "Can I reschedule?", a: "Yes. Message a few hours ahead on WhatsApp and a new slot will be found." },
@@ -1219,7 +1234,7 @@ window.NEXTAI_MENTORSHIP = {
     });
     return g.children.length?g:null;
   }
-  var mg=el("div",{class:"grid2"});
+  var mg=el("div",{class:D.mentors.length>1?"grid2":"grid2 solo"});
   D.mentors.forEach(function(m){
     var av=el("div",{class:"m-avatar","aria-hidden":m.photo?false:"true"},[m.initials]);
     if(m.photo){
@@ -1238,7 +1253,7 @@ window.NEXTAI_MENTORSHIP = {
       el("p",{class:"m-meta",text:m.experience}),
       el("div",{class:"tags"},m.tags.map(function(t){return badge(t);}).concat(m.placeholder?[badge("Placeholder","warn")]:[])),
       el("p",{text:m.bio}),
-      el("p",{class:"m-meta",text:"Languages: "+m.languages.join(", ")}),
+      (m.languages&&m.languages.length?el("p",{class:"m-meta",text:"Languages: "+m.languages.join(", ")}):null),
       acts]);
     mg.appendChild(card);
   });
@@ -1285,7 +1300,7 @@ window.NEXTAI_MENTORSHIP = {
 /* roadmap data + components */
 /* =====================================================================
    ROADMAP CONTENT. Edit this file only; components never need touching.
-   Items marked PLACEHOLDER are not real estimates. Replace before launch.
+   Time estimates are typical for a beginner at 6 to 8 hours a week. Adjust them to match your own experience.
    Each step: title, short, time, learn[], tools[], project{}, resources[], diagram (SVG).
    Resources are {label, url}. Leave the array empty to show "coming soon".
    ===================================================================== */
@@ -1330,7 +1345,7 @@ window.NEXTAI_MENTORSHIP = {
       {
         id: "python", title: "Python & Fundamentals",
         short: "Write real programs before touching any AI library.",
-        time: "4 weeks (placeholder)",
+        time: "About 4 weeks",
         learn: ["Syntax, data structures and functions", "Working with APIs and JSON", "Git basics and problem solving"],
         tools: ["Python", "Git", "Jupyter"],
         project: { title: "API summary tool", desc: "A command line tool that fetches data from a public API and summarises it." },
@@ -1340,7 +1355,7 @@ window.NEXTAI_MENTORSHIP = {
       {
         id: "ml", title: "Machine Learning",
         short: "Understand why a model works before reaching for sklearn.",
-        time: "6 weeks (placeholder)",
+        time: "About 6 weeks",
         learn: ["Regression, trees, KNN, SVM and K-Means", "Data cleaning and feature engineering", "Evaluation metrics that matter"],
         tools: ["scikit-learn", "pandas", "NumPy"],
         project: { title: "Predict from messy data", desc: "Train a model on a real, untidy dataset and explain why it works." },
@@ -1350,7 +1365,7 @@ window.NEXTAI_MENTORSHIP = {
       {
         id: "dl", title: "Deep Learning & LLMs",
         short: "From neural nets to Transformers and large language models.",
-        time: "8 weeks (placeholder)",
+        time: "About 8 weeks",
         learn: ["Gradient descent and backpropagation", "CNNs, RNNs and Transformers", "Prompts, embeddings and tool calling"],
         tools: ["PyTorch", "Hugging Face", "LLM APIs"],
         project: { title: "Small network, then an LLM app", desc: "Train a network end to end, then build a prompt based app on an LLM API." },
@@ -1360,7 +1375,7 @@ window.NEXTAI_MENTORSHIP = {
       {
         id: "rag", title: "RAG & Vector Databases",
         short: "Give a model your own knowledge with retrieval.",
-        time: "4 weeks (placeholder)",
+        time: "About 4 weeks",
         learn: ["Chunking and embeddings", "Vector storage and retrieval", "Why retrieval often beats fine-tuning"],
         tools: ["LangChain", "FAISS", "Chroma"],
         project: { title: "RAG knowledge assistant", desc: "Answer questions over your own documents. Build the pipeline by hand once." },
@@ -1370,7 +1385,7 @@ window.NEXTAI_MENTORSHIP = {
       {
         id: "agents", title: "AI Agents (LangGraph, MCP)",
         short: "Move from fixed chains to agents that decide and act.",
-        time: "6 weeks (placeholder)",
+        time: "About 6 weeks",
         learn: ["Nodes, edges and state in LangGraph", "Conditional routing and human checkpoints", "Exposing tools through MCP"],
         tools: ["LangGraph", "MCP", "LangChain"],
         project: { title: "Agent with approval step", desc: "A single agent with three tools and a human approval before it acts." },
@@ -1380,7 +1395,7 @@ window.NEXTAI_MENTORSHIP = {
       {
         id: "deploy", title: "Deployment & Production",
         short: "Ship it so other people can use it.",
-        time: "4 weeks (placeholder)",
+        time: "About 4 weeks",
         learn: ["Serving a model or app behind an API", "Containers and cloud basics", "Logging and monitoring"],
         tools: ["FastAPI", "Docker", "Kubernetes", "AWS"],
         project: { title: "Deploy your RAG assistant", desc: "Put it behind an API, run it in a container and watch its logs." },
@@ -1526,7 +1541,7 @@ window.NEXTAI_MENTORSHIP = {
       el("div",{class:"rm-sec"},[el("h4",{text:"ESTIMATED TIME"}),el("p",{class:"mono",style:"margin:0",text:s.time})]),
       el("div",{class:"rm-sec rm-res"},[el("h4",{text:"RESOURCES"})].concat(s.resources&&s.resources.length?s.resources.map(function(r){
         var a=el("a",{href:r.url,text:r.label});if(/^#/.test(r.url))a.addEventListener("click",function(){dlg.close();});else{a.target="_blank";a.rel="noopener";}return a;
-      }):[el("p",{class:"mono",style:"margin:0",text:"Resources coming soon (placeholder)."})]))
+      }):[el("p",{class:"mono",style:"margin:0",text:"More resources coming soon."})]))
     ]);
     var foot=el("div",{class:"rm-foot"}),note=el("p",{class:"msg",role:"status",text:msg||""}),main;
     if(st==="current"){main=el("button",{class:"btn p",type:"button",text:"Mark as complete"});main.addEventListener("click",function(){complete(i);});}
@@ -1687,13 +1702,13 @@ window.NEXTAI_NOTES = {
   },
 
   groups: [
-    { id: "python", title: "Python", soon: true },
+    { id: "python", title: "Python" },
     { id: "ml", title: "Machine Learning" },
     { id: "dl", title: "Deep Learning" },
     { id: "llm", title: "LLMs" },
     { id: "rag", title: "RAG" },
     { id: "agents", title: "Agents" },
-    { id: "deploy", title: "Deployment", soon: true },
+    { id: "deploy", title: "Deployment" },
     { id: "approach", title: "Learning approach" }
   ],
 
@@ -1781,15 +1796,14 @@ window.NEXTAI_NOTES = {
       ]
     },
     {
-      id: "rag-by-hand", group: "rag", title: "Build a RAG pipeline by hand", sample: true,
+      id: "rag-by-hand", group: "rag", title: "Build a RAG pipeline by hand",
       summary: "A minimal retrieval pipeline, so you know what a framework is doing for you.",
       blocks: [
-        { t: "callout", kind: "warning", title: "Sample note", text: "This note and its code are a sample. Review and test them before publishing." },
         { t: "p", text: "Building the pipeline once by hand makes every framework easier to understand. The flow has two paths: indexing your documents, and answering a question." },
         { t: "diagram", ref: "rag", caption: "Indexing runs once. Retrieval and generation run for every question." },
         { t: "h2", text: "Retrieve the most similar chunks" },
         { t: "p", text: "This sketch embeds a few documents, stores them in a FAISS index and finds the closest ones to a question." },
-        { t: "code", lang: "python", caption: "Sample, untested", code: "import faiss\nfrom sentence_transformers import SentenceTransformer\n\ndocs = [\n    \"RAG retrieves relevant text before the model answers.\",\n    \"Fine-tuning changes the weights of the model.\",\n    \"FAISS stores vectors and finds the nearest ones.\",\n]\n\nmodel = SentenceTransformer(\"all-MiniLM-L6-v2\")\nvectors = model.encode(docs, normalize_embeddings=True)\n\nindex = faiss.IndexFlatIP(vectors.shape[1])\nindex.add(vectors)\n\nquery = model.encode([\"How does RAG work?\"], normalize_embeddings=True)\nscores, ids = index.search(query, 2)\n\ncontext = \"\\n\".join(docs[i] for i in ids[0])\nprint(context)  # pass this to your LLM as context" },
+        { t: "code", lang: "python", caption: "pip install faiss-cpu sentence-transformers", code: "import faiss\nfrom sentence_transformers import SentenceTransformer\n\ndocs = [\n    \"RAG retrieves relevant text before the model answers.\",\n    \"Fine-tuning changes the weights of the model.\",\n    \"FAISS stores vectors and finds the nearest ones.\",\n]\n\nmodel = SentenceTransformer(\"all-MiniLM-L6-v2\")\nvectors = model.encode(docs, normalize_embeddings=True)\n\nindex = faiss.IndexFlatIP(vectors.shape[1])\nindex.add(vectors)\n\nquery = model.encode([\"How does RAG work?\"], normalize_embeddings=True)\nscores, ids = index.search(query, 2)\n\ncontext = \"\\n\".join(docs[i] for i in ids[0])\nprint(context)  # pass this to your LLM as context" },
         { t: "callout", kind: "tip", title: "Tip", text: "Do this once before you use a framework. You will then know what each `LangChain` retriever is really doing." }
       ]
     },
@@ -1806,14 +1820,13 @@ window.NEXTAI_NOTES = {
       ]
     },
     {
-      id: "agent-loop", group: "agents", title: "The agent loop in code", sample: true,
+      id: "agent-loop", group: "agents", title: "The agent loop in code",
       summary: "A tiny think and act loop in LangGraph.",
       blocks: [
-        { t: "callout", kind: "warning", title: "Sample note", text: "This note and its code are a sample. Review and test them before publishing." },
         { t: "p", text: "An agent is a loop. It thinks, calls a tool if it needs more information, observes the result and thinks again." },
         { t: "diagram", ref: "agent", caption: "The loop ends when the agent decides it can answer." },
         { t: "h2", text: "A minimal graph" },
-        { t: "code", lang: "python", caption: "Sample, untested", code: "from typing import TypedDict\nfrom langgraph.graph import StateGraph, END\n\nclass State(TypedDict):\n    question: str\n    notes: list\n    done: bool\n\ndef think(state: State) -> State:\n    # decide whether more information is needed\n    return {**state, \"done\": len(state[\"notes\"]) >= 2}\n\ndef act(state: State) -> State:\n    # call a tool and store what it returns\n    return {**state, \"notes\": state[\"notes\"] + [\"tool result\"]}\n\ngraph = StateGraph(State)\ngraph.add_node(\"think\", think)\ngraph.add_node(\"act\", act)\ngraph.set_entry_point(\"think\")\ngraph.add_conditional_edges(\"think\", lambda s: END if s[\"done\"] else \"act\")\ngraph.add_edge(\"act\", \"think\")\napp = graph.compile()" },
+        { t: "code", lang: "python", caption: "pip install langgraph", code: "from typing import TypedDict\nfrom langgraph.graph import StateGraph, END\n\nclass State(TypedDict):\n    question: str\n    notes: list\n    done: bool\n\ndef think(state: State) -> State:\n    # decide whether more information is needed\n    return {**state, \"done\": len(state[\"notes\"]) >= 2}\n\ndef act(state: State) -> State:\n    # call a tool and store what it returns\n    return {**state, \"notes\": state[\"notes\"] + [\"tool result\"]}\n\ngraph = StateGraph(State)\ngraph.add_node(\"think\", think)\ngraph.add_node(\"act\", act)\ngraph.set_entry_point(\"think\")\ngraph.add_conditional_edges(\"think\", lambda s: END if s[\"done\"] else \"act\")\ngraph.add_edge(\"act\", \"think\")\napp = graph.compile()" },
         { t: "callout", kind: "tip", title: "Tip", text: "Keep the state small and explicit. Every field in `State` is something the agent can lose track of." }
       ]
     },
@@ -1987,8 +2000,7 @@ window.NEXTAI_NOTES = {
       var a=el("a",{class:"sb-link",href:"#n-"+n.id},[el("span",{text:n.title}),el("span",{class:"rd",hidden:true})]);
       a.addEventListener("click",function(e){e.preventDefault();show(n.id,{scroll:true,focusTitle:true});});
       links[n.id]=a;box.appendChild(a);});
-    if(!has)box.appendChild(el("span",{class:"sb-soon",text:"Coming soon (placeholder)"}));
-    side.appendChild(box);
+    if(has)side.appendChild(box);
   });
   function updateSidebar(){
     ordered.forEach(function(id){var a=links[id],d=a.querySelector(".rd");
@@ -2296,7 +2308,7 @@ window.NEXTAI_RESUME = {
   steps: [
     { title: "Log in and upload", text: "Create a free account, then add your resume as a PDF." },
     { title: "Rohan reviews it", text: "A working GenAI engineer reads it, with no automated scoring." },
-    { title: "Get your feedback", text: "It appears here and is sent to your email." }
+    { title: "Get your feedback", text: "It appears on this page once Rohan has reviewed it. Log in any time to read it." }
   ],
   consult: {
     badge: "1:1 call",
@@ -2316,7 +2328,7 @@ window.NEXTAI_RESUME = {
     button: "Upload my resume",
     consent: "By uploading you agree to the Privacy policy. Your resume is read only for this review.",
     pendingTitle: "Your resume is with Rohan",
-    pendingText: "It is uploaded and waiting for review. You will get the feedback by email at {email}.",
+    pendingText: "It is uploaded and waiting for review. Log in to this page later to read the feedback once it is ready.",
     reviewedTitle: "Your feedback",
     uploadFail: "The upload failed. Please try again.",
     saveFail: "Your file uploaded but the request could not be saved. Please try again.",
@@ -2629,11 +2641,37 @@ window.NEXTAI_CONTACT = {
   var SFX_KEY = "nextai.chat.sound.v1", sfxOn = true, actx = null;
   try { sfxOn = localStorage.getItem(SFX_KEY) !== "off"; } catch (e) {}
   var sfxCan = !!(window.AudioContext || window.webkitAudioContext);
+  var master = null;
   function audio() {
     if (!sfxCan) return null;
-    if (!actx) { try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { sfxCan = false; return null; } }
-    if (actx.state === "suspended") { try { actx.resume(); } catch (e) {} }
+    if (!actx) {
+      try {
+        actx = new (window.AudioContext || window.webkitAudioContext)();
+        // every note goes through one volume control and a gentle limiter, so it is loud enough without ever clipping
+        master = actx.createGain(); master.gain.value = 1;
+        var lim = actx.createDynamicsCompressor();
+        lim.threshold.value = -10; lim.knee.value = 12; lim.ratio.value = 6; lim.attack.value = 0.003; lim.release.value = 0.15;
+        master.connect(lim); lim.connect(actx.destination);
+      } catch (e) { sfxCan = false; actx = null; return null; }
+    }
     return actx;
+  }
+  // phones and Safari keep audio asleep until a tap, so wake it on the very first touch or key press anywhere on the page
+  function unlockAudio() {
+    if (!sfxOn) return;
+    var c = audio(); if (!c) return;
+    try { if (c.state !== "running" && c.resume) c.resume(); var b = c.createBuffer(1, 1, 22050), src = c.createBufferSource(); src.buffer = b; src.connect(c.destination); src.start(0); } catch (e) {}
+    document.removeEventListener("pointerdown", unlockAudio, true);
+    document.removeEventListener("keydown", unlockAudio, true);
+  }
+  document.addEventListener("pointerdown", unlockAudio, true);
+  document.addEventListener("keydown", unlockAudio, true);
+  // play only once the audio is really running, otherwise the first note can be lost
+  function playWhenReady(fn) {
+    if (!sfxOn) return;
+    var c = audio(); if (!c) return;
+    if (c.state === "running") { fn(); return; }
+    try { c.resume().then(fn, function () {}); } catch (e) { fn(); }
   }
   // one soft note: quick fade in, smooth fade out
   function sfxNote(freq, at, len, vol, type) {
@@ -2641,23 +2679,25 @@ window.NEXTAI_CONTACT = {
     var t0 = c.currentTime + at, o = c.createOscillator(), g = c.createGain();
     o.type = type || "sine"; o.frequency.setValueAtTime(freq, t0);
     g.gain.setValueAtTime(0.0001, t0);
-    g.gain.linearRampToValueAtTime(vol, t0 + 0.012);
+    g.gain.linearRampToValueAtTime(vol, t0 + 0.01);
     g.gain.exponentialRampToValueAtTime(0.0001, t0 + len);
-    o.connect(g); g.connect(c.destination);
+    o.connect(g); g.connect(master);
     o.start(t0); o.stop(t0 + len + 0.03);
   }
   // touch sound: a short rising two-note blip, like a switch turning on
   function playOpen() {
-    if (!sfxOn) return;
-    sfxNote(523.25, 0, 0.13, 0.10, "triangle");
-    sfxNote(783.99, 0.075, 0.2, 0.10, "triangle");
+    playWhenReady(function () {
+      sfxNote(523.25, 0, 0.16, 0.45, "triangle");
+      sfxNote(783.99, 0.08, 0.26, 0.45, "triangle");
+    });
   }
-  // reply sound: a soft two-note bell, lower then higher, clearly different from the touch sound
+  // reply sound: a soft two-note bell, clearly different from the touch sound
   function playReply() {
-    if (!sfxOn) return;
-    sfxNote(880, 0, 0.22, 0.09, "sine");
-    sfxNote(1318.5, 0.11, 0.38, 0.08, "sine");
-    sfxNote(2637, 0.11, 0.18, 0.015, "sine");
+    playWhenReady(function () {
+      sfxNote(880, 0, 0.26, 0.40, "sine");
+      sfxNote(1318.5, 0.12, 0.45, 0.36, "sine");
+      sfxNote(2637, 0.12, 0.2, 0.06, "sine");
+    });
   }
 
   function el(tag, cls, text) {
@@ -2708,7 +2748,7 @@ window.NEXTAI_CONTACT = {
     sndBtn.innerHTML = sfxOn ? ICON_ON : ICON_OFF;
     sndBtn.setAttribute("aria-pressed", sfxOn ? "true" : "false");
     sndBtn.setAttribute("aria-label", sfxOn ? "Chat sounds on. Press to mute" : "Chat sounds off. Press to turn on");
-    sndBtn.title = sfxOn ? "Sounds on" : "Sounds off";
+    sndBtn.title = sfxOn ? "Sounds on. Tap to mute" : "Sounds off. Tap to turn on";
   }
   paintSnd();
   sndBtn.addEventListener("click", function () {
@@ -2767,6 +2807,13 @@ window.NEXTAI_CONTACT = {
     wa.rel = "noopener";
     var mail = el("a", "rmchat-action", "Email us");
     mail.href = "mailto:" + EMAIL;
+    var bk = el("button", "rmchat-action", "Book a session");
+    bk.type = "button";
+    bk.addEventListener("click", function () {
+      closePanel();
+      if (window.NextAIMentorship && window.NextAIMentorship.open) window.NextAIMentorship.open("career");
+    });
+    row.appendChild(bk);
     row.appendChild(wa);
     row.appendChild(mail);
     msgs.appendChild(row);
@@ -2840,6 +2887,7 @@ window.NEXTAI_CONTACT = {
         var answer = r.data && typeof r.data.answer === "string" ? r.data.answer : "";
         if (!answer) {
           addMessage("bot", "Sorry, something went wrong. Please try again, or contact us directly.");
+          playReply();
           addContactActions();
           return;
         }
@@ -2861,6 +2909,7 @@ window.NEXTAI_CONTACT = {
         addMessage("bot", preview
           ? "The chat can't connect from this preview page, because previews block requests to other servers. It works once the site is on your own domain. For now you can message Rohan on WhatsApp or by email."
           : "I couldn't reach the server. Please check your connection and try again, or contact us on WhatsApp or by email.");
+        playReply();
         addContactActions();
       })
       .then(function () {
@@ -2998,10 +3047,12 @@ window.NEXTAI_CONTACT = {
   });
 
   // sarcasm on repeat
+  var nudges = 0;                       // at most 5 speech bubbles per visit, so it never feels pushy
   setInterval(function () {
-    if (sleepy || Date.now() < lockUntil) return;
+    if (sleepy || nudges >= 5 || Date.now() < lockUntil) return;
+    nudges++;
     var l = LINES[li++ % LINES.length]; say(l[0], l[1]);
-  }, 12000);
+  }, 20000);
 
   // entrance
   btn.addEventListener("animationend", function (e) {
@@ -3350,11 +3401,11 @@ window.NEXTAI_SITE = {
     var edges=[];nodes.forEach(function(a,i){nodes.forEach(function(b,j){if(b.l===a.l+1)edges.push([i,j]);});});
     function sm(t){return t*t*(3-2*t);}function cl(v){return Math.max(0,Math.min(1,v));}
     function resize(){var dpr=Math.min(devicePixelRatio||1,2);W=cv.clientWidth;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);}
-    var cur=0,target=0,lit=0,litAt=0,now=0,fired=false,vis=false,run=false;
+    var cur=0,target=0,lit=0,litAt=0,now=0,fired=false,vis=false,run=false,playing=false,played=false,t0=null,mx=0,my=0,DUR=3800;
     function pos(n,q,t){
       var x0=n.sx*W+Math.sin(t*.0011+n.ph)*6*(1-q),y0=n.sy*H+Math.cos(t*.0013+n.ph)*6*(1-q);
       var x1=n.tx*W,y1=n.ty*H,bend=Math.sin(q*Math.PI)*34*n.sw;
-      return [x0+(x1-x0)*q,y0+(y1-y0)*q+bend];
+      return [x0+(x1-x0)*q+mx*q*9*(n.l+1),y0+(y1-y0)*q+bend+my*q*6*(n.l+1)];
     }
     function draw(){
       ctx.clearRect(0,0,W,H);
@@ -3373,19 +3424,25 @@ window.NEXTAI_SITE = {
     resize();addEventListener("resize",function(){resize();draw();});
     if(!fxOn){cur=1;lit=1;litAt=0;draw();return;}
     fig.classList.add("sp-hold");
-    function progress(){
-      var sec=document.getElementById("story"),r=sec.getBoundingClientRect(),vh=innerHeight;
-      var t0=vh*.8,t1=vh*.45-r.height;target=cl((t0-r.top)/(t0-t1));
-    }
+    /* plays by itself once the canvas is on screen, then keeps pulsing; it no longer depends on how far you scroll */
     function tick(t){
-      if(!run)return;now=t;progress();cur+=(target-cur)*.12;
-      if(cur>=.985&&!fired){fired=true;litAt=t;fig.classList.remove("sp-hold");}
-      else if(cur<.9&&fired){fired=false;fig.classList.add("sp-hold");}
+      if(!run)return;now=t;
+      if(playing){if(t0===null)t0=t;var k=cl((t-t0)/DUR);target=k;cur=sm(k);}
+      if(cur>=.985&&!fired){fired=true;litAt=t;fig.classList.remove("sp-hold");if(replay)replay.hidden=false;}
       lit+=((fired?1:0)-lit)*.08;draw();requestAnimationFrame(tick);
     }
     function start(){if(vis&&!document.hidden&&!run){run=true;requestAnimationFrame(tick);}}
+    var replay=h("button","btn g sm sp-replay","Replay animation");replay.type="button";replay.hidden=true;
+    replay.addEventListener("click",function(){cur=0;target=0;lit=0;fired=false;t0=null;playing=true;fig.classList.add("sp-hold");replay.hidden=true;start();});
+    card.after(replay);
+    cv.addEventListener("pointermove",function(e){var r=cv.getBoundingClientRect();mx=((e.clientX-r.left)/r.width-.5)*2;my=((e.clientY-r.top)/r.height-.5)*2;});
+    cv.addEventListener("pointerleave",function(){mx=0;my=0;});
     draw();
-    new IntersectionObserver(function(es){vis=es[0].isIntersecting;if(vis)start();else run=false;}).observe(cv);
+    new IntersectionObserver(function(es){
+      var e=es[0];vis=e.isIntersecting;
+      if(vis&&!played&&e.intersectionRatio>=.4){played=true;playing=true;t0=null;}
+      if(vis)start();else run=false;
+    },{threshold:[0,.4,.8]}).observe(cv);
     document.addEventListener("visibilitychange",function(){if(document.hidden)run=false;else start();});
   })();
 
@@ -3398,15 +3455,15 @@ window.NEXTAI_SITE = {
 </script>
 <script>
 /* =====================================================================
-   PROJECTS DATA. Edit this block only. Every project is a draft: check the overview and
-   build steps, then replace the two placeholder cards with your own work.
+   PROJECTS DATA. Edit this block only. Every project is a short brief: check the overview and
+   build steps, and add your own projects the same way.
    "step" must match an id in the Roadmap (python, ml, dl, rag, agents, deploy).
    Do not add links you have not checked.
    ===================================================================== */
 window.NEXTAI_PROJECTS = {
   badge: "Projects",
   title: "Build things you can show",
-  sub: "Nine project briefs, one or more for every stage of the roadmap. Search, filter by topic or level, and open any card for the plan.",
+  sub: "Seven project briefs across the roadmap. Search, filter by topic or level, and open any card for the plan.",
   searchLabel: "Search projects",
   filterTags: ["Python", "ML", "Deep learning", "RAG", "Agents", "MCP", "Deployment"],
   levels: ["Beginner", "Intermediate", "Advanced"],
@@ -3419,54 +3476,48 @@ window.NEXTAI_PROJECTS = {
     email: "nextaiengineers@gmail.com"
   },
   items: [
-    { id: "expense-cli", title: "Command-line expense tracker", level: "Beginner", tags: ["Python"], stack: ["Python", "argparse", "JSON"], step: "python", time: "4 to 6 hours (placeholder)",
+    { id: "expense-cli", title: "Command-line expense tracker", level: "Beginner", tags: ["Python"], stack: ["Python", "argparse", "JSON"], step: "python", time: "About 4 to 6 hours",
       summary: "Record expenses from the terminal and print a monthly summary.",
       overview: "A small tool that records expenses and prints a monthly total by category. It is deliberately plain, because the goal is to write a complete program from start to finish.",
       learn: ["Functions, files and error handling", "Reading and writing JSON", "Parsing command-line arguments", "Writing a few tests"],
       steps: ["Decide the commands: add, list and summary", "Store the expenses in a JSON file", "Check the amount and date before saving", "Print a monthly total grouped by category", "Write three tests with pytest"],
       flow: ["Command", "Parse", "Validate", "JSON file", "Summary"] },
-    { id: "price-model", title: "House price prediction model", level: "Beginner", tags: ["ML", "Python"], stack: ["pandas", "scikit-learn", "Matplotlib"], step: "ml", time: "8 to 10 hours (placeholder)",
+    { id: "price-model", title: "House price prediction model", level: "Beginner", tags: ["ML", "Python"], stack: ["pandas", "scikit-learn", "Matplotlib"], step: "ml", time: "About 8 to 10 hours",
       summary: "Predict prices from a public table of data and explain what matters.",
       overview: "Predict prices from a public tabular dataset and explain which features matter. Most of the work is understanding the data, not tuning the model.",
       learn: ["Cleaning and exploring tabular data", "Train and test splits", "A baseline first, then a better model", "Reading error metrics honestly"],
       steps: ["Load the data and look for missing values", "Build a baseline that predicts the average", "Train linear regression and a random forest", "Compare the errors on held-out data", "Write down what the model gets wrong"],
       flow: ["Raw data", "Clean", "Split", "Train", "Evaluate"] },
-    { id: "image-classifier", title: "Image classifier with PyTorch", level: "Intermediate", tags: ["Deep learning", "Python"], stack: ["PyTorch", "torchvision", "Matplotlib"], step: "dl", time: "10 to 14 hours (placeholder)",
+    { id: "image-classifier", title: "Image classifier with PyTorch", level: "Intermediate", tags: ["Deep learning", "Python"], stack: ["PyTorch", "torchvision", "Matplotlib"], step: "dl", time: "About 10 to 14 hours",
       summary: "Train a small network on public images, then study where it fails.",
       overview: "Train a small convolutional network on a public image dataset, then plot the mistakes it makes and think about why.",
       learn: ["Tensors, datasets and data loaders", "A training loop you wrote yourself", "Spotting overfitting", "Reading a confusion matrix"],
       steps: ["Load a small image dataset", "Build a baseline network", "Write the training loop", "Plot training and validation loss", "Show five wrong predictions and guess why"],
       flow: ["Images", "DataLoader", "CNN", "Loss", "Evaluate"] },
-    { id: "rag-assistant", title: "RAG knowledge assistant", level: "Intermediate", tags: ["RAG", "Python"], stack: ["Python", "FAISS", "FastAPI", "An LLM API"], step: "rag", featured: true, time: "12 to 16 hours (placeholder)",
+    { id: "rag-assistant", title: "RAG knowledge assistant", level: "Intermediate", tags: ["RAG", "Python"], stack: ["Python", "FAISS", "FastAPI", "An LLM API"], step: "rag", featured: true, time: "About 12 to 16 hours",
       summary: "Answer questions over your own documents, with the sources shown.",
       overview: "Answer questions over your own documents. Chunk, embed, store and retrieve, then compare the result against fine-tuning.",
       learn: ["Chunking and embeddings", "Storing vectors and retrieving by similarity", "Putting retrieved text into a prompt", "Checking answers against their sources"],
       steps: ["Collect ten documents you know well", "Split them into chunks and embed them", "Store the vectors in FAISS", "Retrieve the best chunks for a question", "Build the prompt and call the model", "Show the source chunks beside each answer"],
       flow: ["Documents", "Chunk", "Embed", "Vector store", "Retrieve", "LLM answer"] },
-    { id: "research-agent", title: "LangGraph research agent", level: "Intermediate", tags: ["Agents"], stack: ["LangGraph", "Python", "A search tool"], step: "agents", time: "10 to 14 hours (placeholder)",
+    { id: "research-agent", title: "LangGraph research agent", level: "Intermediate", tags: ["Agents"], stack: ["LangGraph", "Python", "A search tool"], step: "agents", time: "About 10 to 14 hours",
       summary: "One agent, three tools and a human approval step before it acts.",
       overview: "A single agent with three tools and a human approval step before it acts. Keep it small so you can see the state at every step.",
       learn: ["Nodes, edges and state", "Conditional routing", "A human approval checkpoint", "Why state management matters"],
       steps: ["Define the state your graph carries", "Write three small tools", "Add a node that picks which tool to call", "Add a pause that asks for approval", "Log every step so you can replay it"],
       flow: ["Question", "Plan", "Tool call", "Approval", "Answer"] },
-    { id: "mcp-server", title: "MCP tool server", level: "Intermediate", tags: ["MCP", "Agents", "Python"], stack: ["Python", "MCP SDK"], step: "agents", time: "6 to 8 hours (placeholder)",
+    { id: "mcp-server", title: "MCP tool server", level: "Intermediate", tags: ["MCP", "Agents", "Python"], stack: ["Python", "MCP SDK"], step: "agents", time: "About 6 to 8 hours",
       summary: "Expose a small API as a tool any compatible assistant can call.",
       overview: "Expose a small API as a tool that any MCP-compatible assistant can call, and test it with a real client.",
       learn: ["What a good tool description needs", "Input validation", "Returning results an assistant can use", "Testing with a real client"],
       steps: ["Pick a small API with one clear job", "Describe the tool and its inputs", "Implement the handler", "Validate inputs and return clear errors", "Connect it to an MCP-compatible client"],
       flow: ["Assistant", "MCP client", "Tool server", "Your API"] },
-    { id: "model-api", title: "Ship a model API with FastAPI and Docker", level: "Advanced", tags: ["Deployment", "Python"], stack: ["FastAPI", "Docker", "Python"], step: "deploy", time: "8 to 12 hours (placeholder)",
+    { id: "model-api", title: "Ship a model API with FastAPI and Docker", level: "Advanced", tags: ["Deployment", "Python"], stack: ["FastAPI", "Docker", "Python"], step: "deploy", time: "About 8 to 12 hours",
       summary: "Wrap a trained model in an API and run it from a container.",
       overview: "Wrap a model you already trained in an API, package it in a container and run it somewhere other than your own laptop.",
       learn: ["Typed request and response models", "A health check and basic logging", "Writing a small Dockerfile", "Running the container and calling it"],
       steps: ["Save the model from an earlier project", "Write a predict endpoint with typed input", "Add a health check", "Write a Dockerfile", "Build and run the container", "Call it from a second machine or a cloud service"],
-      flow: ["Request", "FastAPI", "Model", "Response", "Container"] },
-    { id: "placeholder-a", title: "Placeholder: multi-agent workflow", level: "Advanced", tags: ["Agents"], stack: [], step: "agents", placeholder: true, time: "To be confirmed",
-      summary: "Placeholder card. Replace it with a real project or delete it.",
-      overview: "This is a placeholder card. Replace it with a real project, or delete the entry from the data block.", learn: [], steps: [], flow: [] },
-    { id: "placeholder-b", title: "Placeholder: model monitoring dashboard", level: "Advanced", tags: ["Deployment"], stack: [], step: "deploy", placeholder: true, time: "To be confirmed",
-      summary: "Placeholder card. Replace it with a real project or delete it.",
-      overview: "This is a placeholder card. Replace it with a real project, or delete the entry from the data block.", learn: [], steps: [], flow: [] }
+      flow: ["Request", "FastAPI", "Model", "Response", "Container"] }
   ]
 };
 
@@ -3642,6 +3693,124 @@ window.NEXTAI_PROJECTS = {
     io.observe(h);
   });
 })();
+</script>
+<script>
+/* =====================================================================
+   START HERE QUIZ. Edit the wording and the rules here; nothing else needs touching.
+   The result picks a roadmap step from the first answer, a project from that step,
+   and a next move (free resume review or the career call) from the last answer.
+   ===================================================================== */
+window.NEXTAI_QUIZ = {
+  badge: "Start here",
+  title: "Not sure where to begin? Take the 1\u00A0minute quiz",
+  sub: "Four quick questions. You get a first step on the roadmap, a project to build and the best next move.",
+  questions: [
+    { id: "level", q: "Where are you today?", opts: [["new", "New to programming"], ["python", "I know some Python"], ["ml", "I have built ML models"], ["llm", "I already work with LLMs"]] },
+    { id: "goal", q: "What is your goal?", opts: [["job", "Get my first AI job"], ["switch", "Switch from another tech role"], ["build", "Build my own AI project"], ["grow", "Grow in my current job"]] },
+    { id: "time", q: "How many hours a week can you give?", opts: [["low", "Under 5"], ["mid", "5 to 10"], ["high", "More than 10"]] },
+    { id: "block", q: "What is holding you back most?", opts: [["what", "I do not know what to learn"], ["courses", "Too many courses, nothing finished"], ["projects", "I cannot finish projects"], ["resume", "My resume gets no replies"]] }
+  ],
+  step:    { new: "python", python: "ml", ml: "dl", llm: "agents" },
+  project: { python: "expense-cli", ml: "price-model", dl: "image-classifier", agents: "research-agent" },
+  why: {
+    new: "You are at the very beginning, so write real programs before you touch any AI library.",
+    python: "You know the basics, so build the machine learning foundation next.",
+    ml: "You have the ML base, so move into neural networks and large language models.",
+    llm: "You already use LLMs, so go deeper into agents and the tools around them."
+  },
+  goalNote: {
+    job: "Your goal is a first AI job, so finish one project per step and put each one on GitHub.",
+    switch: "You are switching roles, so lean on what you already know from your current field and pick projects close to it.",
+    build: "You want to build your own project, so take the project below and start it this week.",
+    grow: "You want to grow at work, so choose the step that matches a problem you face on the job."
+  },
+  pace: {
+    low: "At under 5 hours a week, progress will be steady but slower, so expect each step to take longer than its estimate.",
+    mid: "5 to 10 hours a week is a good pace. Each step should fit its estimate.",
+    high: "With more than 10 hours a week you can move faster than the estimates. Spend the extra time building projects."
+  },
+  blockNote: {
+    what: "Not knowing what to learn is exactly what a short call fixes. Bring this result and Rohan will sharpen it for you.",
+    courses: "Pick this one step and ignore every other course for now. One finished project beats five half-watched courses.",
+    projects: "Start with the small project below and keep it tiny. Finishing something small builds the habit.",
+    resume: "A free resume review shows what to fix for AI engineering roles, before you apply anywhere."
+  }
+};
+
+(function(){
+  "use strict";
+  var D=window.NEXTAI_QUIZ,root=document.getElementById("quiz-root");if(!D||!root)return;
+  function h(tag,cls,text){var n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;}
+  function add(p){for(var i=1;i<arguments.length;i++){if(arguments[i])p.appendChild(arguments[i]);}return p;}
+  var sh=h("div","sh");add(sh,h("span","badge accent",D.badge),h("h2",null,D.title),h("p",null,D.sub));root.appendChild(sh);
+  var box=h("div","card feat qz");root.appendChild(box);
+  var Q=D.questions,N=Q.length,ans={},at=0;
+  function label(qid,val){var q=Q.filter(function(x){return x.id===qid;})[0];var o=q.opts.filter(function(x){return x[0]===val;})[0];return o?o[1]:val;}
+
+  function ask(){
+    box.textContent="";
+    var q=Q[at];
+    var top=h("div","qz-top");add(top,h("span","mono","Question "+(at+1)+" of "+N));box.appendChild(top);
+    var bar=h("div","qz-bar"),fill=h("i");fill.style.width=Math.round(at/N*100)+"%";bar.appendChild(fill);
+    bar.setAttribute("role","progressbar");bar.setAttribute("aria-valuemin","0");bar.setAttribute("aria-valuemax",String(N));bar.setAttribute("aria-valuenow",String(at));bar.setAttribute("aria-label","Quiz progress");
+    box.appendChild(bar);
+    var fs=h("fieldset"),lg=h("legend",null,q.q);lg.tabIndex=-1;fs.appendChild(lg);
+    var opts=h("div","qz-opts"),next=h("button","btn p","");
+    q.opts.forEach(function(o){
+      var lab=h("label","qz-opt"),inp=document.createElement("input");
+      inp.type="radio";inp.name="qz-"+q.id;inp.value=o[0];
+      if(ans[q.id]===o[0]){inp.checked=true;lab.classList.add("is-on");}
+      inp.addEventListener("change",function(){
+        ans[q.id]=o[0];[].forEach.call(opts.children,function(c){c.classList.toggle("is-on",c.firstChild.checked);});
+        next.disabled=false;
+      });
+      add(lab,inp,h("span",null,o[1]));opts.appendChild(lab);
+    });
+    fs.appendChild(opts);box.appendChild(fs);
+    var nav=h("div","qz-nav");
+    if(at>0){var back=h("button","btn s","Back");back.type="button";back.addEventListener("click",function(){at--;ask();});nav.appendChild(back);}
+    next.type="button";next.textContent=at===N-1?"See my plan":"Next";next.disabled=!ans[q.id];
+    next.addEventListener("click",function(){if(!ans[q.id])return;if(at<N-1){at++;ask();}else result();});
+    nav.appendChild(next);box.appendChild(nav);
+    lg.focus({preventScroll:true});
+  }
+
+  function result(){
+    var R=window.NEXTAI_ROADMAP,stepId=D.step[ans.level],st=R&&R.steps.filter(function(s){return s.id===stepId;})[0];
+    var projId=D.project[stepId],resumeFirst=ans.block==="resume";
+    box.textContent="";box.classList.add("qz-res");
+    var res=h("div");
+    add(res,h("span","badge accent","Your plan"));
+    var hd=h("h3",null,st?"Start with: "+st.title:"Start with the first roadmap step");hd.tabIndex=-1;res.appendChild(hd);
+    res.appendChild(h("p",null,D.why[ans.level]));
+    if(st)res.appendChild(h("p","mono","Estimated time: "+st.time));
+    var recap=h("div","qz-recap");["level","goal","time","block"].forEach(function(k){recap.appendChild(h("span","badge",label(k,ans[k])));});res.appendChild(recap);
+    var note=h("div","qz-box");
+    add(note,h("b",null,"What this means for you"),h("p",null,D.goalNote[ans.goal]),h("p",null,D.pace[ans.time]),h("p",null,D.blockNote[ans.block]));
+    res.appendChild(note);
+    var acts=h("div","qz-nav");
+    function btn(text,cls,fn){var b=h("button","btn "+cls,text);b.type="button";b.addEventListener("click",fn);acts.appendChild(b);}
+    if(resumeFirst){
+      btn("Get a free resume review","p",function(){var s=document.getElementById("resume");if(s)s.scrollIntoView({behavior:"smooth",block:"start"});setTimeout(function(){var i=document.getElementById("rv-name")||document.getElementById("rv-file");if(i)i.focus({preventScroll:true});},600);});
+      btn("Book a 20 minute call","s",function(){if(window.NextAIMentorship)window.NextAIMentorship.open("career");});
+    }else{
+      btn("Book a 20 minute call","p",function(){if(window.NextAIMentorship)window.NextAIMentorship.open("career");});
+      btn("Get a free resume review","s",function(){var s=document.getElementById("resume");if(s)s.scrollIntoView({behavior:"smooth",block:"start"});});
+    }
+    if(st)btn("Open this roadmap step","s",function(){if(window.NextAIRoadmap)window.NextAIRoadmap.open(stepId);});
+    if(projId)btn("See the starter project","s",function(){if(window.NextAIProjects)window.NextAIProjects.open(projId);});
+    btn("Retake the quiz","g",function(){ans={};at=0;box.classList.remove("qz-res");ask();});
+    res.appendChild(acts);box.appendChild(res);hd.focus({preventScroll:true});
+  }
+  ask();
+})();
+</script>
+<script>
+/* Any button or link marked data-book opens the booking form with the career call selected. */
+document.addEventListener("click",function(e){
+  var b=e.target.closest&&e.target.closest("[data-book]");if(!b)return;
+  var M=window.NextAIMentorship;if(M&&M.open){e.preventDefault();M.open("career");}
+});
 </script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "29f535859a5d4e88b295548853034e53"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
